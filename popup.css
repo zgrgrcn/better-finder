@@ -40,6 +40,18 @@
   --scroll-track: #f1f1f1;
   --scroll-thumb: #c1c1c1;
   --shadow: rgba(0, 0, 0, 0.08);
+  --title-color: inherit;
+  --title-size: 16px;
+  --title-weight: 600;
+  --title-transform: none;
+  --title-spacing: -0.3px;
+  --btn-radius: 6px;
+  --btn-add-border: none;
+  --btn-clear-border: none;
+  --btn-add-shadow: none;
+  --btn-clear-shadow: none;
+  --btn-confirm-shadow: none;
+  --option-radius: 4px;
 }
 
 :root[data-theme="dark"] {
@@ -209,6 +221,199 @@
   --shadow: rgba(61, 57, 41, 0.08);
 }
 
+/* Spotify: near-black, green pill buttons */
+:root[data-theme="spotify"] {
+  color-scheme: dark;
+  --title-weight: 800;
+  --bg: #121212;
+  --surface: #121212;
+  --surface-2: #000000;
+  --surface-3: #1f1f1f;
+  --input-bg: #242424;
+  --input-focus-bg: #2a2a2a;
+  --border: #292929;
+  --border-strong: #535353;
+  --text: #ffffff;
+  --text-muted: #b3b3b3;
+  --text-faint: #6a6a6a;
+  --accent: #1ed760;
+  --accent-hover: #3be477;
+  --accent-text: #000000;
+  --focus-ring: rgba(30, 215, 96, 0.3);
+  --header-bg: linear-gradient(180deg, #1e4d30 0%, #121212 100%);
+  --header-text: #ffffff;
+  --btn-radius: 500px;
+  --btn-add-bg: #1ed760;
+  --btn-add-text: #000000;
+  --btn-clear-bg: transparent;
+  --btn-clear-text: #ffffff;
+  --btn-clear-border: 1px solid #727272;
+  --btn-confirm-bg: #e91429;
+  --option-radius: 500px;
+  --danger: #f15e6c;
+  --danger-bg: #3d1418;
+  --danger-border: #5c1f25;
+  --danger-text: #f7a3ab;
+  --scroll-track: #121212;
+  --scroll-thumb: #535353;
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* Netflix: black, red wordmark, red button */
+:root[data-theme="netflix"] {
+  color-scheme: dark;
+  --title-font: 'Bebas Neue', Impact, 'Arial Narrow Bold', 'Helvetica Neue', sans-serif;
+  --title-color: #e50914;
+  --title-size: 20px;
+  --title-weight: 800;
+  --title-transform: uppercase;
+  --title-spacing: 0.5px;
+  --bg: #141414;
+  --surface: #141414;
+  --surface-2: #000000;
+  --surface-3: #232323;
+  --input-bg: #333333;
+  --input-focus-bg: #454545;
+  --border: #2f2f2f;
+  --border-strong: #808080;
+  --text: #ffffff;
+  --text-muted: #b3b3b3;
+  --text-faint: #737373;
+  --accent: #e50914;
+  --accent-hover: #f6121d;
+  --accent-text: #ffffff;
+  --focus-ring: rgba(229, 9, 20, 0.35);
+  --header-bg: #000000;
+  --header-text: #ffffff;
+  --btn-radius: 4px;
+  --btn-add-bg: #e50914;
+  --btn-clear-bg: rgba(109, 109, 110, 0.7);
+  --btn-confirm-bg: #b20710;
+  --danger: #e87c03;
+  --danger-bg: #2b1a05;
+  --danger-border: #6b3c02;
+  --danger-text: #f5a540;
+  --scroll-track: #141414;
+  --scroll-thumb: #4d4d4d;
+  --shadow: rgba(0, 0, 0, 0.6);
+}
+
+/* Discord: dark gray, blurple */
+:root[data-theme="discord"] {
+  color-scheme: dark;
+  --title-weight: 700;
+  --bg: #313338;
+  --surface: #313338;
+  --surface-2: #2b2d31;
+  --surface-3: #2b2d31;
+  --input-bg: #1e1f22;
+  --input-focus-bg: #1e1f22;
+  --border: #3f4147;
+  --border-strong: #4e5058;
+  --text: #dbdee1;
+  --text-muted: #b5bac1;
+  --text-faint: #80848e;
+  --accent: #5865f2;
+  --accent-hover: #4752c4;
+  --accent-text: #ffffff;
+  --focus-ring: rgba(88, 101, 242, 0.45);
+  --header-bg: #2b2d31;
+  --header-text: #f2f3f5;
+  --header-border: #1f2023;
+  --btn-radius: 4px;
+  --btn-add-bg: #5865f2;
+  --btn-clear-bg: #4e5058;
+  --btn-confirm-bg: #da373c;
+  --danger: #f23f43;
+  --danger-bg: #3d2326;
+  --danger-border: #5c2b2e;
+  --danger-text: #fa777c;
+  --scroll-track: #2b2d31;
+  --scroll-thumb: #1a1b1e;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+/* Instagram: white, the gradient, blue actions */
+:root[data-theme="instagram"] {
+  color-scheme: light;
+  --title-font: 'Snell Roundhand', 'Segoe Script', 'Brush Script MT', cursive;
+  --title-size: 22px;
+  --title-weight: 700;
+  --title-spacing: 0;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #fafafa;
+  --surface-3: #efefef;
+  --input-bg: #efefef;
+  --input-focus-bg: #ffffff;
+  --border: #dbdbdb;
+  --border-strong: #c7c7c7;
+  --text: #262626;
+  --text-muted: #737373;
+  --text-faint: #a8a8a8;
+  --accent: #0095f6;
+  --accent-hover: #1877f2;
+  --accent-text: #ffffff;
+  --focus-ring: rgba(0, 149, 246, 0.2);
+  --header-bg: linear-gradient(45deg, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%);
+  --header-text: #ffffff;
+  --btn-radius: 8px;
+  --btn-add-bg: linear-gradient(45deg, #fa7e1e 0%, #d62976 50%, #962fbf 100%);
+  --btn-clear-bg: #efefef;
+  --btn-clear-text: #000000;
+  --btn-confirm-bg: #ed4956;
+  --danger: #ed4956;
+  --danger-bg: #fdecee;
+  --danger-border: #f8c4c9;
+  --danger-text: #c13540;
+  --scroll-track: #fafafa;
+  --scroll-thumb: #dbdbdb;
+  --shadow: rgba(0, 0, 0, 0.06);
+}
+
+/* Duolingo: owl green, chunky 3D buttons */
+:root[data-theme="duolingo"] {
+  color-scheme: light;
+  --font: ui-rounded, 'SF Pro Rounded', 'Nunito', 'Varela Round', -apple-system, sans-serif;
+  --title-weight: 800;
+  --title-size: 18px;
+  --title-spacing: 0;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f7f7f7;
+  --surface-3: #f7f7f7;
+  --input-bg: #f7f7f7;
+  --input-focus-bg: #ffffff;
+  --border: #e5e5e5;
+  --border-strong: #cecece;
+  --text: #4b4b4b;
+  --text-muted: #777777;
+  --text-faint: #afafaf;
+  --accent: #1cb0f6;
+  --accent-hover: #1899d6;
+  --accent-text: #ffffff;
+  --focus-ring: rgba(28, 176, 246, 0.25);
+  --header-bg: #58cc02;
+  --header-text: #ffffff;
+  --btn-radius: 14px;
+  --btn-add-bg: #58cc02;
+  --btn-add-shadow: 0 4px 0 #58a700;
+  --btn-clear-bg: #ffffff;
+  --btn-clear-text: #1cb0f6;
+  --btn-clear-border: 2px solid #e5e5e5;
+  --btn-clear-shadow: 0 4px 0 #e5e5e5;
+  --btn-confirm-bg: #ff4b4b;
+  --btn-confirm-shadow: 0 4px 0 #ea2b2b;
+  --option-radius: 8px;
+  --danger: #ff4b4b;
+  --danger-bg: #ffdfe0;
+  --danger-border: #ffc1c1;
+  --danger-text: #ea2b2b;
+  --scroll-track: #f7f7f7;
+  --scroll-thumb: #e5e5e5;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+
 body {
   font-family: var(--font);
   width: 380px;
@@ -241,9 +446,11 @@ header {
 
 header h1 {
   font-family: var(--title-font);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
+  font-size: var(--title-size);
+  font-weight: var(--title-weight);
+  letter-spacing: var(--title-spacing);
+  text-transform: var(--title-transform);
+  color: var(--title-color);
 }
 
 .theme-select {
@@ -433,7 +640,7 @@ header h1 {
   width: 24px;
   height: 24px;
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--option-radius);
   background: var(--surface);
   color: var(--text-faint);
   font-size: 10px;
@@ -501,7 +708,7 @@ header h1 {
   flex: 1;
   padding: 10px 16px;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--btn-radius);
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
@@ -523,16 +730,22 @@ header h1 {
 .btn-add {
   background: var(--btn-add-bg);
   color: var(--btn-add-text);
+  border: var(--btn-add-border);
+  box-shadow: var(--btn-add-shadow);
 }
 
 .btn-clear {
   background: var(--btn-clear-bg);
   color: var(--btn-clear-text);
+  border: var(--btn-clear-border);
+  box-shadow: var(--btn-clear-shadow);
 }
 
 .btn-clear.confirm {
   background: var(--btn-confirm-bg);
   color: #ffffff;
+  border-color: transparent;
+  box-shadow: var(--btn-confirm-shadow);
 }
 
 .empty-state {
@@ -575,4 +788,31 @@ header h1 {
   color: var(--danger-text);
   background: var(--danger-bg);
   border-bottom: 1px solid var(--danger-border);
+}
+
+/* Duolingo buttons keep their 3D edge on hover and sink into it when pressed */
+:root[data-theme="duolingo"] .btn:hover {
+  transform: none;
+  filter: brightness(1.05);
+}
+
+:root[data-theme="duolingo"] .btn-add:hover {
+  box-shadow: var(--btn-add-shadow);
+}
+
+:root[data-theme="duolingo"] .btn-clear:hover {
+  box-shadow: var(--btn-clear-shadow);
+}
+
+:root[data-theme="duolingo"] .btn-clear.confirm:hover {
+  box-shadow: var(--btn-confirm-shadow);
+}
+
+:root[data-theme="duolingo"] .btn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+:root[data-theme="duolingo"] .actions {
+  padding-bottom: 16px;
 }
