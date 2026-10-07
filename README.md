@@ -11,3 +11,5 @@ Auto-highlight is opt-in per site. Turning it on in the popup asks Chrome for th
 UI strings live in `_locales/` (24 languages, Chrome's supported locale codes only).
 
 The original source was lost. This repo was recovered from the published v1.0.1 package on the Chrome Web Store.
+
+`store-assets/` holds the Chrome Web Store screenshots (1280x800) and promo tiles. They use the real popup.
