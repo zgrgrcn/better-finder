@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Vyhľadávajte viac slov naraz, každé vo vlastnej farbe, s možnosťou rozlišovať veľkosť písmen a celé slová."
+  },
+  "popupTitle": {
+    "message": "Nájsť a zvýrazniť"
+  },
+  "autoHighlight": {
+    "message": "Automaticky zvýrazňovať na tejto stránke"
+  },
+  "addKeyword": {
+    "message": "Pridať slovo"
+  },
+  "clearAll": {
+    "message": "Vymazať všetko"
+  },
+  "clearConfirm": {
+    "message": "Kliknite znova na vymazanie"
+  },
+  "keywordPlaceholder": {
+    "message": "Slovo..."
+  },
+  "previousMatch": {
+    "message": "Predchádzajúce (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Nasledujúce (Enter)"
+  },
+  "highlightColor": {
+    "message": "Farba zvýraznenia"
+  },
+  "matchCase": {
+    "message": "Rozlišovať veľké a malé písmená"
+  },
+  "wholeWord": {
+    "message": "Celé slovo"
+  },
+  "remove": {
+    "message": "Odstrániť"
+  },
+  "emptyState": {
+    "message": "Začnite kliknutím na „Pridať slovo“"
+  },
+  "pageNotSupported": {
+    "message": "Chrome na tejto stránke nepovoľuje rozšírenia."
+  },
+  "connectError": {
+    "message": "Stránka nie je dostupná. Obnovte ju a skúste to znova."
+  }
+}

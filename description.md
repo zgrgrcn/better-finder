@@ -49,6 +49,6 @@ Transform your web browsing experience with Better Finder, a powerful Chrome ext
 - No data is sent to external servers
 - No tracking or analytics
 - Open source: https://github.com/zgrgrcn/better-finder
-- The interface is available in 23 languages
+- The interface is available in 24 languages
 
 Enhance your productivity and make web searching more efficient with Better Finder!
