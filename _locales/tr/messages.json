@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "Birden fazla kelimeyi aynı anda arayın; her kelime kendi renginde, büyük/küçük harf ve tam kelime seçenekleriyle."
   },

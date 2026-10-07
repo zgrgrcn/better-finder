@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "Vyhľadávajte viac slov naraz, každé vo vlastnej farbe, s možnosťou rozlišovať veľkosť písmen a celé slová."
   },

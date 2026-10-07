@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "एक साथ कई शब्द खोजें, हर शब्द अपने रंग में, केस और पूरे शब्द के विकल्पों के साथ।"
   },

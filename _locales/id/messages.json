@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "Cari beberapa kata sekaligus, masing-masing dengan warnanya sendiri, dengan opsi huruf besar/kecil dan seluruh kata."
   },

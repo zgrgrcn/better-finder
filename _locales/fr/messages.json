@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "Recherchez plusieurs mots à la fois, chacun dans sa couleur, avec respect de la casse et mot entier pour chaque mot."
   },

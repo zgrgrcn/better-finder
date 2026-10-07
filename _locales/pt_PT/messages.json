@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "Procure várias palavras ao mesmo tempo, cada uma com a sua cor, com opções de maiúsculas e palavra inteira."
   },

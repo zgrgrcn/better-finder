@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "同时搜索多个关键词，每个关键词使用不同颜色，并可单独设置区分大小写和全字匹配。"
   },

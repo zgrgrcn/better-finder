@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "Tìm nhiều từ khóa cùng lúc, mỗi từ một màu, với tùy chọn phân biệt hoa/thường và nguyên từ."
   },

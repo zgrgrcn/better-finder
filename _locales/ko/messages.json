@@ -1,4 +1,7 @@
 {
+  "extName": {
+    "message": "Better Finder"
+  },
   "extDescription": {
     "message": "여러 키워드를 한 번에 검색하고 각각 다른 색으로 강조합니다. 키워드별 대소문자 구분과 단어 단위 옵션을 지원합니다."
   },
