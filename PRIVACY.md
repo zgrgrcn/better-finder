@@ -9,7 +9,7 @@ Better Finder does not collect, transmit, sell or share any user data.
 - The keywords you add, their colors and their match-case and whole-word settings, saved per site with `chrome.storage.local`.
 - The popup theme you pick, saved in the extension's own local storage.
 
-All of this stays in your browser on your device. You can remove it by clicking "Clear All" in the popup or by uninstalling the extension.
+All of this stays in your browser on your device. "Clear All" in the popup removes the keywords saved for that site, and uninstalling the extension removes everything.
 
 ## What the extension reads
 
