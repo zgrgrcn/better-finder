@@ -50,6 +50,6 @@ Transform your web browsing experience with Better Finder, a powerful Chrome ext
 - No tracking or analytics
 - Open source: https://github.com/zgrgrcn/better-finder
 - The interface is available in 24 languages
-- Light, dark and themes inspired by apps you know (VS Code, Darcula, Claude, Spotify, Netflix, Discord, Instagram, Duolingo), or follow the system setting
+- 8 themes inspired by apps you know (Claude, VS Code, Darcula, Spotify, Netflix, Discord, Instagram, Duolingo); Auto switches between Claude and VS Code with your system
 
 Enhance your productivity and make web searching more efficient with Better Finder!

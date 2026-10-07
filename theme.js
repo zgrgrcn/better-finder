@@ -1,16 +1,22 @@
 // Runs in <head> before the first paint, so the popup opens in the saved theme
-const THEMES = ['light', 'dark', 'vscode', 'darcula', 'claude', 'spotify', 'netflix', 'discord', 'instagram', 'duolingo'];
+const THEMES = ['claude', 'vscode', 'darcula', 'spotify', 'netflix', 'discord', 'instagram', 'duolingo'];
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+let themeChoice = 'auto';
 
-function applyTheme(theme) {
-  if (THEMES.includes(theme)) {
-    document.documentElement.dataset.theme = theme;
-  } else {
-    delete document.documentElement.dataset.theme; // "auto": follow the system
-  }
+// "auto" follows the system: Claude when light, VS Code when dark
+function applyTheme(choice) {
+  themeChoice = THEMES.includes(choice) ? choice : 'auto';
+  document.documentElement.dataset.theme = themeChoice === 'auto'
+    ? (systemDark.matches ? 'vscode' : 'claude')
+    : themeChoice;
 }
+
+systemDark.addEventListener('change', () => {
+  if (themeChoice === 'auto') applyTheme('auto');
+});
 
 try {
   applyTheme(localStorage.getItem('theme'));
 } catch {
-  // Storage unavailable: keep the system theme
+  applyTheme('auto');
 }

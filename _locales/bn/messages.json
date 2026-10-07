@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "স্বয়ংক্রিয়"
-  },
-  "themeLight": {
-    "message": "হালকা"
-  },
-  "themeDark": {
-    "message": "গাঢ়"
   }
 }

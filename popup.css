@@ -4,8 +4,8 @@
   box-sizing: border-box;
 }
 
-/* Themes: every color comes from these variables. "Auto" (no data-theme)
-   follows the system, the rest are picked in the header. */
+/* Themes: every color comes from these variables. theme.js always sets a
+   data-theme; these defaults only show if it can't run. */
 :root {
   color-scheme: light;
   --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -52,70 +52,6 @@
   --btn-clear-shadow: none;
   --btn-confirm-shadow: none;
   --option-radius: 4px;
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #17181b;
-  --surface: #1f2024;
-  --surface-2: #26282d;
-  --surface-3: #2c2e34;
-  --input-bg: #17181b;
-  --input-focus-bg: #121316;
-  --border: #34363d;
-  --border-strong: #4a4d56;
-  --text: #e4e6eb;
-  --text-muted: #a3a7b0;
-  --text-faint: #6f737c;
-  --accent: #8b9cf7;
-  --accent-hover: #a3b0fa;
-  --accent-text: #15161a;
-  --focus-ring: rgba(139, 156, 247, 0.25);
-  --header-bg: linear-gradient(135deg, #4c5bd4 0%, #5b3a8c 100%);
-  --header-text: #ffffff;
-  --btn-add-bg: linear-gradient(135deg, #2f9e72 0%, #2b78a8 100%);
-  --btn-clear-bg: linear-gradient(135deg, #4b5560 0%, #3d3354 100%);
-  --btn-confirm-bg: linear-gradient(135deg, #e05252 0%, #a12626 100%);
-  --danger: #f87171;
-  --danger-bg: #3a1f22;
-  --danger-border: #5c2a2e;
-  --danger-text: #fca5a5;
-  --scroll-track: #1f2024;
-  --scroll-thumb: #4a4d56;
-  --shadow: rgba(0, 0, 0, 0.4);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    color-scheme: dark;
-    --bg: #17181b;
-    --surface: #1f2024;
-    --surface-2: #26282d;
-    --surface-3: #2c2e34;
-    --input-bg: #17181b;
-    --input-focus-bg: #121316;
-    --border: #34363d;
-    --border-strong: #4a4d56;
-    --text: #e4e6eb;
-    --text-muted: #a3a7b0;
-    --text-faint: #6f737c;
-    --accent: #8b9cf7;
-    --accent-hover: #a3b0fa;
-    --accent-text: #15161a;
-    --focus-ring: rgba(139, 156, 247, 0.25);
-    --header-bg: linear-gradient(135deg, #4c5bd4 0%, #5b3a8c 100%);
-    --header-text: #ffffff;
-    --btn-add-bg: linear-gradient(135deg, #2f9e72 0%, #2b78a8 100%);
-    --btn-clear-bg: linear-gradient(135deg, #4b5560 0%, #3d3354 100%);
-    --btn-confirm-bg: linear-gradient(135deg, #e05252 0%, #a12626 100%);
-    --danger: #f87171;
-    --danger-bg: #3a1f22;
-    --danger-border: #5c2a2e;
-    --danger-text: #fca5a5;
-    --scroll-track: #1f2024;
-    --scroll-thumb: #4a4d56;
-    --shadow: rgba(0, 0, 0, 0.4);
-  }
 }
 
 /* VS Code Dark+ */

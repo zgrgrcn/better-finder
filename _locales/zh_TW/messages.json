@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "自動"
-  },
-  "themeLight": {
-    "message": "淺色"
-  },
-  "themeDark": {
-    "message": "深色"
   }
 }

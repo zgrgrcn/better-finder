@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "Otomatis"
-  },
-  "themeLight": {
-    "message": "Terang"
-  },
-  "themeDark": {
-    "message": "Gelap"
   }
 }

@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "Automaticky"
-  },
-  "themeLight": {
-    "message": "Svetlý"
-  },
-  "themeDark": {
-    "message": "Tmavý"
   }
 }

@@ -58,7 +58,7 @@ function localize() {
 // theme.js already applied the saved theme; this keeps the picker in sync
 function setupThemeSelect() {
   const select = document.getElementById('themeSelect');
-  select.value = document.documentElement.dataset.theme || 'auto';
+  select.value = themeChoice;
   select.addEventListener('change', () => {
     applyTheme(select.value);
     try {

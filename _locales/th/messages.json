@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "อัตโนมัติ"
-  },
-  "themeLight": {
-    "message": "สว่าง"
-  },
-  "themeDark": {
-    "message": "มืด"
   }
 }

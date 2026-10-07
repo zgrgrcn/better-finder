@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "خودکار"
-  },
-  "themeLight": {
-    "message": "روشن"
-  },
-  "themeDark": {
-    "message": "تیره"
   }
 }

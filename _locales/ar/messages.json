@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "تلقائي"
-  },
-  "themeLight": {
-    "message": "فاتح"
-  },
-  "themeDark": {
-    "message": "داكن"
   }
 }

@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "Auto"
-  },
-  "themeLight": {
-    "message": "Clair"
-  },
-  "themeDark": {
-    "message": "Sombre"
   }
 }

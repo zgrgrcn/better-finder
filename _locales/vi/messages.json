@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "Tự động"
-  },
-  "themeLight": {
-    "message": "Sáng"
-  },
-  "themeDark": {
-    "message": "Tối"
   }
 }

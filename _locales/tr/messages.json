@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "Otomatik"
-  },
-  "themeLight": {
-    "message": "Açık"
-  },
-  "themeDark": {
-    "message": "Koyu"
   }
 }

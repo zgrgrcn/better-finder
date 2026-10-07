@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "자동"
-  },
-  "themeLight": {
-    "message": "라이트"
-  },
-  "themeDark": {
-    "message": "다크"
   }
 }

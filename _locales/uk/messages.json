@@ -52,11 +52,5 @@
   },
   "themeAuto": {
     "message": "Авто"
-  },
-  "themeLight": {
-    "message": "Світла"
-  },
-  "themeDark": {
-    "message": "Темна"
   }
 }
