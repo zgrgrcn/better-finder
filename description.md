@@ -1,55 +1,33 @@
-**Better Finder - Advanced Multi-Keyword Search & Highlight**
+Better Finder: search for many words at once, each in its own color.
 
-Transform your web browsing experience with Better Finder, a powerful Chrome extension that takes search and highlighting to the next level. Unlike Chrome's basic find tool, Better Finder allows you to search for multiple keywords simultaneously, each with its own unique highlight color.
+Chrome's Ctrl+F finds one word at a time. Better Finder highlights as many keywords as you like together, so you can scan a page for everything you care about in one look.
 
-**Key Features:**
+MULTIPLE KEYWORDS
+• Every keyword gets its own highlight color, its own match counter and its own next / previous buttons
+• Press Enter or Shift+Enter in a keyword to jump between its matches
+• Pick any color with the color picker
 
-✨ **Multiple Keyword Search**
-- Search for multiple keywords at once
-- Each keyword gets its own distinct highlight color
-- Perfect for comparing different terms or tracking multiple concepts
+PRECISE MATCHING, PER KEYWORD
+• Match case: find "Apple" the company without "apple" the fruit
+• Whole word: find "art" without "start" or "party"
+• Works in every language and script: Turkish, Cyrillic, Arabic, Chinese, Japanese, Thai and more
 
-🎨 **Customizable Colors**
-- Assign unique colors to each keyword
-- Easy-to-use color picker for instant customization
-- Visual distinction makes it easy to identify different search terms
+HIGHLIGHTS ITSELF
+• Keywords are saved per site and come back when you open the popup
+• Optional auto-highlight: turn it on for a site and your keywords are marked every time a page loads there
+• Content that appears later (infinite scroll, single-page apps) is highlighted as it loads
 
-⚙️ **Advanced Matching Options**
-- **Match Case**: Toggle case-sensitive matching for each keyword
-- **Match Whole Word**: Find complete words only, not partial matches
-- Individual settings for each keyword
+MADE FOR YOU
+• 8 themes inspired by apps you know: Claude, VS Code, Darcula, Spotify, Netflix, Discord, Instagram and Duolingo. Auto switches between Claude and VS Code with your system
+• The interface is available in 24 languages
 
-🚀 **Smart & Fast**
-- Real-time highlighting as you type
-- Optional auto-highlight: turn it on per site and your saved keywords are highlighted every time a page loads
-- New content is highlighted as it appears (infinite scroll, single-page apps)
-- Works in every language: whole-word matching understands Turkish, Cyrillic, Arabic, Chinese, Japanese, Thai and more
+PERFECT FOR
+• Recruiters scanning job posts and CVs for skills
+• Researchers and students tracking several terms in long articles
+• Developers reading documentation
+• Anyone who uses Ctrl+F more than once on the same page
 
-💾 **Persistent Storage**
-- Keywords are saved per domain
-- Your search preferences persist across sessions
-- Quick access to frequently used searches
-
-**Perfect For:**
-- Developers reviewing code or documentation
-- Researchers comparing multiple terms
-- Students studying and highlighting key concepts
-- Content creators analyzing text patterns
-- Anyone who needs advanced search capabilities
-
-**How It Works:**
-1. Click the extension icon to open the popup
-2. Add keywords and customize colors
-3. Set match case and whole word options
-4. Keywords are highlighted automatically as you type
-5. Optional: tick "Highlight automatically on this site" to highlight on every visit
-
-**Privacy & Security:**
-- All data is stored locally on your device
-- No data is sent to external servers
-- No tracking or analytics
-- Open source: https://github.com/zgrgrcn/better-finder
-- The interface is available in 24 languages
-- 8 themes inspired by apps you know (Claude, VS Code, Darcula, Spotify, Netflix, Discord, Instagram, Duolingo); Auto switches between Claude and VS Code with your system
-
-Enhance your productivity and make web searching more efficient with Better Finder!
+PRIVACY
+• Everything stays on your device. No accounts, no servers, no tracking
+• No access to any site until you click the icon. Auto-highlight asks for permission one site at a time
+• Free and open source: https://github.com/zgrgrcn/better-finder
