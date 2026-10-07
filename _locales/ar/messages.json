@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "ابحث عن عدة كلمات في وقت واحد، لكل كلمة لونها، مع خيارات مطابقة حالة الأحرف والكلمة الكاملة."
+  },
+  "popupTitle": {
+    "message": "بحث وتمييز"
+  },
+  "autoHighlight": {
+    "message": "التمييز تلقائيًا في هذا الموقع"
+  },
+  "addKeyword": {
+    "message": "إضافة كلمة"
+  },
+  "clearAll": {
+    "message": "مسح الكل"
+  },
+  "clearConfirm": {
+    "message": "انقر مرة أخرى للمسح"
+  },
+  "keywordPlaceholder": {
+    "message": "كلمة..."
+  },
+  "previousMatch": {
+    "message": "السابق (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "التالي (Enter)"
+  },
+  "highlightColor": {
+    "message": "لون التمييز"
+  },
+  "matchCase": {
+    "message": "مطابقة حالة الأحرف"
+  },
+  "wholeWord": {
+    "message": "الكلمة كاملة"
+  },
+  "remove": {
+    "message": "إزالة"
+  },
+  "emptyState": {
+    "message": "انقر على \"إضافة كلمة\" للبدء"
+  },
+  "pageNotSupported": {
+    "message": "لا يسمح Chrome بالإضافات في هذه الصفحة."
+  },
+  "connectError": {
+    "message": "تعذّر الوصول إلى الصفحة. أعد تحميلها وحاول مرة أخرى."
+  }
+}

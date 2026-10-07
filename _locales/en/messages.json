@@ -1,0 +1,53 @@
+{
+  "extName": {
+    "message": "Better Finder"
+  },
+  "extDescription": {
+    "message": "Search for several words at once, each in its own color, with match-case and whole-word options per word."
+  },
+  "popupTitle": {
+    "message": "Find and Highlight"
+  },
+  "autoHighlight": {
+    "message": "Highlight automatically on this site"
+  },
+  "addKeyword": {
+    "message": "Add Keyword"
+  },
+  "clearAll": {
+    "message": "Clear All"
+  },
+  "clearConfirm": {
+    "message": "Click again to clear"
+  },
+  "keywordPlaceholder": {
+    "message": "Keyword..."
+  },
+  "previousMatch": {
+    "message": "Previous (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Next (Enter)"
+  },
+  "highlightColor": {
+    "message": "Highlight color"
+  },
+  "matchCase": {
+    "message": "Match case"
+  },
+  "wholeWord": {
+    "message": "Whole word"
+  },
+  "remove": {
+    "message": "Remove"
+  },
+  "emptyState": {
+    "message": "Click \"Add Keyword\" to start"
+  },
+  "pageNotSupported": {
+    "message": "Chrome doesn't allow extensions on this page."
+  },
+  "connectError": {
+    "message": "Couldn't reach the page. Refresh it and try again."
+  }
+}

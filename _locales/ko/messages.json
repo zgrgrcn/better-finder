@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "여러 키워드를 한 번에 검색하고 각각 다른 색으로 강조합니다. 키워드별 대소문자 구분과 단어 단위 옵션을 지원합니다."
+  },
+  "popupTitle": {
+    "message": "찾기 및 강조"
+  },
+  "autoHighlight": {
+    "message": "이 사이트에서 자동으로 강조"
+  },
+  "addKeyword": {
+    "message": "키워드 추가"
+  },
+  "clearAll": {
+    "message": "모두 지우기"
+  },
+  "clearConfirm": {
+    "message": "지우려면 다시 클릭하세요"
+  },
+  "keywordPlaceholder": {
+    "message": "키워드..."
+  },
+  "previousMatch": {
+    "message": "이전 (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "다음 (Enter)"
+  },
+  "highlightColor": {
+    "message": "강조 색상"
+  },
+  "matchCase": {
+    "message": "대소문자 구분"
+  },
+  "wholeWord": {
+    "message": "단어 단위"
+  },
+  "remove": {
+    "message": "삭제"
+  },
+  "emptyState": {
+    "message": "시작하려면 \"키워드 추가\"를 클릭하세요"
+  },
+  "pageNotSupported": {
+    "message": "Chrome은 이 페이지에서 확장 프로그램을 허용하지 않습니다."
+  },
+  "connectError": {
+    "message": "페이지에 연결할 수 없습니다. 새로고침한 후 다시 시도하세요."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "چند کلمه را هم‌زمان جستجو کنید، هر کدام با رنگ خودش، با گزینه‌های حساسیت به حروف و کلمهٔ کامل."
+  },
+  "popupTitle": {
+    "message": "جستجو و برجسته‌سازی"
+  },
+  "autoHighlight": {
+    "message": "برجسته‌سازی خودکار در این سایت"
+  },
+  "addKeyword": {
+    "message": "افزودن کلمه"
+  },
+  "clearAll": {
+    "message": "پاک کردن همه"
+  },
+  "clearConfirm": {
+    "message": "برای پاک کردن دوباره کلیک کنید"
+  },
+  "keywordPlaceholder": {
+    "message": "کلمه..."
+  },
+  "previousMatch": {
+    "message": "قبلی (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "بعدی (Enter)"
+  },
+  "highlightColor": {
+    "message": "رنگ برجسته‌سازی"
+  },
+  "matchCase": {
+    "message": "حساس به حروف بزرگ و کوچک"
+  },
+  "wholeWord": {
+    "message": "کلمهٔ کامل"
+  },
+  "remove": {
+    "message": "حذف"
+  },
+  "emptyState": {
+    "message": "برای شروع روی «افزودن کلمه» کلیک کنید"
+  },
+  "pageNotSupported": {
+    "message": "Chrome اجازهٔ افزونه در این صفحه را نمی‌دهد."
+  },
+  "connectError": {
+    "message": "دسترسی به صفحه ممکن نشد. صفحه را تازه کنید و دوباره امتحان کنید."
+  }
+}

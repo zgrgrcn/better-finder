@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Find and Highlight</title>
+  <title data-i18n="popupTitle">Find and Highlight</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Find and Highlight</h1>
+      <h1 data-i18n="popupTitle">Find and Highlight</h1>
     </header>
-    
+
+    <label class="auto-toggle" id="autoToggleRow" hidden>
+      <input type="checkbox" id="autoToggle">
+      <span data-i18n="autoHighlight">Highlight automatically on this site</span>
+    </label>
+
+    <div class="status" id="status" hidden></div>
+
     <div class="keywords-container" id="keywordsContainer">
       <!-- Keyword rows will be dynamically added here -->
     </div>
-    
+
     <div class="actions">
-      <button id="addKeywordBtn" class="btn btn-add">Add Keyword</button>
-      <button id="clearBtn" class="btn btn-clear">Clear All</button>
+      <button id="addKeywordBtn" class="btn btn-add" data-i18n="addKeyword">Add Keyword</button>
+      <button id="clearBtn" class="btn btn-clear" data-i18n="clearAll">Clear All</button>
     </div>
   </div>
-  
+
   <script src="popup.js"></script>
 </body>
 </html>
-

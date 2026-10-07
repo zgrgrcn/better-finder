@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Cari beberapa kata sekaligus, masing-masing dengan warnanya sendiri, dengan opsi huruf besar/kecil dan seluruh kata."
+  },
+  "popupTitle": {
+    "message": "Cari dan Sorot"
+  },
+  "autoHighlight": {
+    "message": "Sorot otomatis di situs ini"
+  },
+  "addKeyword": {
+    "message": "Tambah kata kunci"
+  },
+  "clearAll": {
+    "message": "Hapus semua"
+  },
+  "clearConfirm": {
+    "message": "Klik lagi untuk menghapus"
+  },
+  "keywordPlaceholder": {
+    "message": "Kata kunci..."
+  },
+  "previousMatch": {
+    "message": "Sebelumnya (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Berikutnya (Enter)"
+  },
+  "highlightColor": {
+    "message": "Warna sorotan"
+  },
+  "matchCase": {
+    "message": "Cocokkan huruf besar/kecil"
+  },
+  "wholeWord": {
+    "message": "Seluruh kata"
+  },
+  "remove": {
+    "message": "Hapus"
+  },
+  "emptyState": {
+    "message": "Klik \"Tambah kata kunci\" untuk memulai"
+  },
+  "pageNotSupported": {
+    "message": "Chrome tidak mengizinkan ekstensi di halaman ini."
+  },
+  "connectError": {
+    "message": "Tidak dapat menjangkau halaman. Muat ulang lalu coba lagi."
+  }
+}

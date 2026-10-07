@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "ค้นหาหลายคำพร้อมกัน แต่ละคำมีสีของตัวเอง พร้อมตัวเลือกตรงตามตัวพิมพ์และค้นหาทั้งคำ"
+  },
+  "popupTitle": {
+    "message": "ค้นหาและไฮไลต์"
+  },
+  "autoHighlight": {
+    "message": "ไฮไลต์อัตโนมัติในเว็บไซต์นี้"
+  },
+  "addKeyword": {
+    "message": "เพิ่มคำค้น"
+  },
+  "clearAll": {
+    "message": "ล้างทั้งหมด"
+  },
+  "clearConfirm": {
+    "message": "คลิกอีกครั้งเพื่อล้าง"
+  },
+  "keywordPlaceholder": {
+    "message": "คำค้น..."
+  },
+  "previousMatch": {
+    "message": "ก่อนหน้า (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "ถัดไป (Enter)"
+  },
+  "highlightColor": {
+    "message": "สีไฮไลต์"
+  },
+  "matchCase": {
+    "message": "ตรงตามตัวพิมพ์เล็ก/ใหญ่"
+  },
+  "wholeWord": {
+    "message": "ทั้งคำ"
+  },
+  "remove": {
+    "message": "ลบ"
+  },
+  "emptyState": {
+    "message": "คลิก \"เพิ่มคำค้น\" เพื่อเริ่มต้น"
+  },
+  "pageNotSupported": {
+    "message": "Chrome ไม่อนุญาตให้ใช้ส่วนขยายในหน้านี้"
+  },
+  "connectError": {
+    "message": "ไม่สามารถเชื่อมต่อกับหน้าเว็บได้ โปรดรีเฟรชแล้วลองอีกครั้ง"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Busca varias palabras a la vez, cada una con su color y con opciones de mayúsculas y palabra completa."
+  },
+  "popupTitle": {
+    "message": "Buscar y resaltar"
+  },
+  "autoHighlight": {
+    "message": "Resaltar automáticamente en este sitio"
+  },
+  "addKeyword": {
+    "message": "Añadir palabra"
+  },
+  "clearAll": {
+    "message": "Borrar todo"
+  },
+  "clearConfirm": {
+    "message": "Haz clic de nuevo para borrar"
+  },
+  "keywordPlaceholder": {
+    "message": "Palabra..."
+  },
+  "previousMatch": {
+    "message": "Anterior (Mayús+Intro)"
+  },
+  "nextMatch": {
+    "message": "Siguiente (Intro)"
+  },
+  "highlightColor": {
+    "message": "Color de resaltado"
+  },
+  "matchCase": {
+    "message": "Distinguir mayúsculas"
+  },
+  "wholeWord": {
+    "message": "Palabra completa"
+  },
+  "remove": {
+    "message": "Eliminar"
+  },
+  "emptyState": {
+    "message": "Haz clic en «Añadir palabra» para empezar"
+  },
+  "pageNotSupported": {
+    "message": "Chrome no permite extensiones en esta página."
+  },
+  "connectError": {
+    "message": "No se pudo acceder a la página. Recárgala e inténtalo de nuevo."
+  }
+}

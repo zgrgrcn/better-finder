@@ -21,9 +21,9 @@ Transform your web browsing experience with Better Finder, a powerful Chrome ext
 
 🚀 **Smart & Fast**
 - Real-time highlighting as you type
-- Automatic highlighting without clicking buttons
-- Keyboard shortcut support (⌘F / Ctrl+F)
-- Works seamlessly alongside Chrome's native find tool
+- Optional auto-highlight: turn it on per site and your saved keywords are highlighted every time a page loads
+- New content is highlighted as it appears (infinite scroll, single-page apps)
+- Works in every language: whole-word matching understands Turkish, Cyrillic, Arabic, Chinese, Japanese, Thai and more
 
 💾 **Persistent Storage**
 - Keywords are saved per domain
@@ -42,12 +42,13 @@ Transform your web browsing experience with Better Finder, a powerful Chrome ext
 2. Add keywords and customize colors
 3. Set match case and whole word options
 4. Keywords are highlighted automatically as you type
-5. Press ⌘F (Mac) or Ctrl+F (Windows) to open alongside Chrome's find tool
+5. Optional: tick "Highlight automatically on this site" to highlight on every visit
 
 **Privacy & Security:**
 - All data is stored locally on your device
 - No data is sent to external servers
 - No tracking or analytics
-- Open source and transparent
+- Open source: https://github.com/zgrgrcn/better-finder
+- The interface is available in 23 languages
 
 Enhance your productivity and make web searching more efficient with Better Finder!

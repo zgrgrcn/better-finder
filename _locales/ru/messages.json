@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Ищите несколько слов одновременно, каждое своим цветом, с учётом регистра и поиском целых слов."
+  },
+  "popupTitle": {
+    "message": "Найти и выделить"
+  },
+  "autoHighlight": {
+    "message": "Автоматически выделять на этом сайте"
+  },
+  "addKeyword": {
+    "message": "Добавить слово"
+  },
+  "clearAll": {
+    "message": "Очистить всё"
+  },
+  "clearConfirm": {
+    "message": "Нажмите ещё раз, чтобы очистить"
+  },
+  "keywordPlaceholder": {
+    "message": "Слово..."
+  },
+  "previousMatch": {
+    "message": "Предыдущее (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Следующее (Enter)"
+  },
+  "highlightColor": {
+    "message": "Цвет выделения"
+  },
+  "matchCase": {
+    "message": "Учитывать регистр"
+  },
+  "wholeWord": {
+    "message": "Слово целиком"
+  },
+  "remove": {
+    "message": "Удалить"
+  },
+  "emptyState": {
+    "message": "Нажмите «Добавить слово», чтобы начать"
+  },
+  "pageNotSupported": {
+    "message": "Chrome не разрешает расширения на этой странице."
+  },
+  "connectError": {
+    "message": "Не удалось подключиться к странице. Обновите её и попробуйте снова."
+  }
+}

@@ -1,8 +1,11 @@
 let keywordRows = [];
 let keywordIdCounter = 0;
 let matchCounts = {};
+let currentTab = null;
 
 const defaultColors = ['#ffff00', '#ff0000', '#00ff00', '#0000ff', '#ff00ff', '#00ffff'];
+
+const t = key => chrome.i18n.getMessage(key);
 
 function getNextAvailableColor() {
   const usedColors = keywordRows.map(row => row.color);
@@ -15,35 +18,81 @@ function getNextAvailableColor() {
 }
 
 let highlightTimer = null;
+let clearTimer = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
+  localize();
+
+  [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
   await loadKeywords();
   renderKeywords();
 
-  document.getElementById('addKeywordBtn').addEventListener('click', addKeywordRow);
-  document.getElementById('clearBtn').addEventListener('click', clearHighlights);
+  document.getElementById('addKeywordBtn').addEventListener('click', () => addKeywordRow());
+  document.getElementById('clearBtn').addEventListener('click', onClearClick);
 
-  await refreshMatchCounts();
+  await setupAutoToggle();
+
+  if (!isSearchable()) {
+    showStatus('pageNotSupported');
+    return;
+  }
+
+  // Show the saved keywords right away; if the page already has them, just read the counts
+  await highlightKeywords({ scroll: false, keepIfSame: true });
 });
 
-async function refreshMatchCounts() {
+function localize() {
+  document.documentElement.lang = chrome.i18n.getUILanguage();
+  document.documentElement.dir = t('@@bidi_dir') || 'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    element.textContent = t(element.dataset.i18n);
+  });
+}
+
+function isSearchable() {
+  return !!currentTab?.url && /^(https?|file):/.test(currentTab.url);
+}
+
+function getDomain() {
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (!tab.url || tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://')) {
-      return;
-    }
-
-    const isReady = await ensureContentScript(tab.id);
-    if (!isReady) return;
-
-    const response = await chrome.tabs.sendMessage(tab.id, { action: 'getMatchCounts' });
-    if (response && response.matchCounts) {
-      matchCounts = response.matchCounts;
-      updateMatchCountsUI();
-    }
-  } catch (error) {
-    console.error('Error refreshing match counts:', error);
+    return new URL(currentTab.url).hostname;
+  } catch {
+    return null;
   }
+}
+
+function showStatus(key) {
+  const status = document.getElementById('status');
+  status.textContent = t(key);
+  status.hidden = false;
+}
+
+// Opt-in per site: granting the site's host permission makes background.js
+// inject the highlighter on every page load there
+async function setupAutoToggle() {
+  if (!currentTab?.url || !/^https?:/.test(currentTab.url)) return;
+
+  const url = new URL(currentTab.url);
+  const origins = [`${url.protocol}//${url.hostname}/*`];
+  const row = document.getElementById('autoToggleRow');
+  const checkbox = document.getElementById('autoToggle');
+
+  checkbox.checked = await chrome.permissions.contains({ origins });
+  row.hidden = false;
+
+  checkbox.addEventListener('change', async () => {
+    try {
+      if (checkbox.checked) {
+        checkbox.checked = await chrome.permissions.request({ origins });
+      } else {
+        await chrome.permissions.remove({ origins });
+      }
+    } catch (error) {
+      console.error('Error changing auto-highlight:', error);
+      checkbox.checked = await chrome.permissions.contains({ origins });
+    }
+  });
 }
 
 function updateMatchCountsUI() {
@@ -68,9 +117,8 @@ function updateMatchCountsUI() {
 
 async function loadKeywords() {
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    const domain = new URL(tab.url).hostname;
-    const result = await chrome.storage.local.get([`keywords_${domain}`]);
+    const domain = getDomain();
+    const result = domain === null ? {} : await chrome.storage.local.get([`keywords_${domain}`]);
     const savedKeywords = result[`keywords_${domain}`] || [];
 
     if (savedKeywords.length > 0) {
@@ -86,9 +134,9 @@ async function loadKeywords() {
 }
 
 async function saveKeywords() {
+  const domain = getDomain();
+  if (domain === null) return;
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    const domain = new URL(tab.url).hostname;
     await chrome.storage.local.set({ [`keywords_${domain}`]: keywordRows });
   } catch (error) {
     console.error('Error saving keywords:', error);
@@ -140,22 +188,17 @@ function updateKeyword(id, field, value) {
 function debouncedHighlight() {
   clearTimeout(highlightTimer);
   highlightTimer = setTimeout(() => {
-    highlightKeywords();
+    highlightKeywords({ scroll: true });
   }, 300);
 }
 
 async function navigateMatch(keywordId, direction) {
+  if (!isSearchable()) return;
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    if (!tab.url || tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://')) {
-      return;
-    }
-
-    const isReady = await ensureContentScript(tab.id);
+    const isReady = await ensureContentScript(currentTab.id);
     if (!isReady) return;
 
-    const response = await chrome.tabs.sendMessage(tab.id, {
+    const response = await chrome.tabs.sendMessage(currentTab.id, {
       action: 'navigateToMatch',
       keywordId,
       direction
@@ -178,7 +221,7 @@ function renderKeywords() {
   const container = document.getElementById('keywordsContainer');
 
   if (keywordRows.length === 0) {
-    container.innerHTML = '<div class="empty-state">Click "Add Keyword" to start</div>';
+    container.innerHTML = `<div class="empty-state">${escapeHtml(t('emptyState'))}</div>`;
     return;
   }
 
@@ -197,50 +240,51 @@ function renderKeywords() {
 
     return `
     <div class="keyword-row" data-id="${row.id}">
-      <input 
-        type="text" 
-        class="keyword-input" 
-        placeholder="Keyword..."
+      <input
+        type="text"
+        class="keyword-input"
+        placeholder="${escapeHtml(t('keywordPlaceholder'))}"
         value="${escapeHtml(row.keyword)}"
         data-id="${row.id}"
         data-field="keyword"
+        dir="auto"
       />
       <div class="match-info">
         <span class="${countClass}" data-id="${row.id}">${countDisplay}</span>
-        <button class="nav-btn nav-prev" data-id="${row.id}" title="Previous (Shift+Enter)">
+        <button class="nav-btn nav-prev" data-id="${row.id}" title="${escapeHtml(t('previousMatch'))}">
           <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 2L2 5L5 8M8 5H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <button class="nav-btn nav-next" data-id="${row.id}" title="Next (Enter)">
+        <button class="nav-btn nav-next" data-id="${row.id}" title="${escapeHtml(t('nextMatch'))}">
           <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 8L8 5L5 2M2 5H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
       </div>
-      <input 
-        type="color" 
-        class="color-input" 
+      <input
+        type="color"
+        class="color-input"
         value="${row.color}"
         data-id="${row.id}"
         data-field="color"
-        title="Highlight color"
+        title="${escapeHtml(t('highlightColor'))}"
       />
       <div class="options">
-        <button 
+        <button
           class="option-btn ${row.matchCase ? 'active' : ''}"
           data-id="${row.id}"
           data-field="matchCase"
-          title="Match case"
+          title="${escapeHtml(t('matchCase'))}"
         >Aa</button>
-        <button 
+        <button
           class="option-btn ${row.wholeWord ? 'active' : ''}"
           data-id="${row.id}"
           data-field="wholeWord"
-          title="Whole word"
+          title="${escapeHtml(t('wholeWord'))}"
         >W</button>
       </div>
-      <button class="delete-btn" data-id="${row.id}" title="Remove">
+      <button class="delete-btn" data-id="${row.id}" title="${escapeHtml(t('remove'))}">
         <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11 3L3 11M3 3L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
@@ -311,7 +355,6 @@ async function ensureContentScript(tabId) {
         target: { tabId },
         files: ['content.js']
       });
-      await new Promise(resolve => setTimeout(resolve, 150));
       await chrome.tabs.sendMessage(tabId, { action: 'ping' });
       return true;
     } catch (injectError) {
@@ -321,33 +364,33 @@ async function ensureContentScript(tabId) {
   }
 }
 
-async function highlightKeywords() {
+// Same shape content.js builds from storage, so it can tell nothing changed
+function keywordPayload() {
+  return keywordRows
+    .filter(row => row.keyword.trim() !== '')
+    .map(row => ({
+      id: row.id,
+      keyword: row.keyword.trim(),
+      color: row.color,
+      matchCase: !!row.matchCase,
+      wholeWord: !!row.wholeWord
+    }));
+}
+
+async function highlightKeywords({ scroll, keepIfSame = false }) {
+  if (!isSearchable()) return;
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    if (!tab.url || tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://')) {
-      return;
-    }
-
-    const isReady = await ensureContentScript(tab.id);
+    const isReady = await ensureContentScript(currentTab.id);
     if (!isReady) {
-      alert('Could not connect to page. Please refresh and try again.');
+      showStatus('connectError');
       return;
     }
 
-    const keywords = keywordRows
-      .filter(row => row.keyword.trim() !== '')
-      .map(row => ({
-        id: row.id,
-        keyword: row.keyword.trim(),
-        color: row.color,
-        matchCase: row.matchCase,
-        wholeWord: row.wholeWord
-      }));
-
-    const response = await chrome.tabs.sendMessage(tab.id, {
+    const response = await chrome.tabs.sendMessage(currentTab.id, {
       action: 'highlight',
-      keywords
+      keywords: keywordPayload(),
+      scroll,
+      keepIfSame
     });
 
     if (response && response.matchCounts) {
@@ -356,40 +399,55 @@ async function highlightKeywords() {
     }
   } catch (error) {
     console.error('Error highlighting keywords:', error);
-    if (!error.message.includes('Receiving end does not exist')) {
-      alert('Error highlighting. Please refresh the page.');
-    }
+    showStatus('connectError');
   }
+}
+
+// Clearing deletes this site's saved keywords, so it takes a second click
+function onClearClick() {
+  const button = document.getElementById('clearBtn');
+  if (!button.classList.contains('confirm')) {
+    button.classList.add('confirm');
+    button.textContent = t('clearConfirm');
+    clearTimer = setTimeout(resetClearButton, 3000);
+    return;
+  }
+  resetClearButton();
+  clearHighlights();
+}
+
+function resetClearButton() {
+  clearTimeout(clearTimer);
+  const button = document.getElementById('clearBtn');
+  button.classList.remove('confirm');
+  button.textContent = t('clearAll');
 }
 
 async function clearHighlights() {
-  try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    if (tab.url && !tab.url.startsWith('chrome://') && !tab.url.startsWith('chrome-extension://')) {
-      const isReady = await ensureContentScript(tab.id);
-      if (isReady) {
-        try {
-          await chrome.tabs.sendMessage(tab.id, { action: 'clear' });
-        } catch (error) {
-          console.error('Error clearing highlights:', error);
-        }
+  if (isSearchable()) {
+    const isReady = await ensureContentScript(currentTab.id);
+    if (isReady) {
+      try {
+        await chrome.tabs.sendMessage(currentTab.id, { action: 'clear' });
+      } catch (error) {
+        console.error('Error clearing highlights:', error);
       }
     }
-
-    keywordRows = [];
-    keywordIdCounter = 0;
-    matchCounts = {};
-    renderKeywords();
-    saveKeywords();
-    addKeywordRow();
-  } catch (error) {
-    console.error('Error clearing all:', error);
   }
+
+  keywordRows = [];
+  keywordIdCounter = 0;
+  matchCounts = {};
+  renderKeywords();
+  saveKeywords();
+  addKeywordRow();
 }
 
 function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }

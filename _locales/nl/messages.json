@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Zoek naar meerdere woorden tegelijk, elk in een eigen kleur, met opties voor hoofdletters en hele woorden."
+  },
+  "popupTitle": {
+    "message": "Zoeken en markeren"
+  },
+  "autoHighlight": {
+    "message": "Automatisch markeren op deze site"
+  },
+  "addKeyword": {
+    "message": "Woord toevoegen"
+  },
+  "clearAll": {
+    "message": "Alles wissen"
+  },
+  "clearConfirm": {
+    "message": "Klik nogmaals om te wissen"
+  },
+  "keywordPlaceholder": {
+    "message": "Zoekwoord..."
+  },
+  "previousMatch": {
+    "message": "Vorige (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Volgende (Enter)"
+  },
+  "highlightColor": {
+    "message": "Markeerkleur"
+  },
+  "matchCase": {
+    "message": "Hoofdlettergevoelig"
+  },
+  "wholeWord": {
+    "message": "Heel woord"
+  },
+  "remove": {
+    "message": "Verwijderen"
+  },
+  "emptyState": {
+    "message": "Klik op \"Woord toevoegen\" om te beginnen"
+  },
+  "pageNotSupported": {
+    "message": "Chrome staat geen extensies toe op deze pagina."
+  },
+  "connectError": {
+    "message": "Kan de pagina niet bereiken. Vernieuw de pagina en probeer het opnieuw."
+  }
+}

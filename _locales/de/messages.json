@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Mehrere Wörter gleichzeitig suchen, jedes in eigener Farbe, mit Optionen für Groß-/Kleinschreibung und ganze Wörter."
+  },
+  "popupTitle": {
+    "message": "Suchen und Markieren"
+  },
+  "autoHighlight": {
+    "message": "Auf dieser Website automatisch markieren"
+  },
+  "addKeyword": {
+    "message": "Begriff hinzufügen"
+  },
+  "clearAll": {
+    "message": "Alle löschen"
+  },
+  "clearConfirm": {
+    "message": "Zum Löschen erneut klicken"
+  },
+  "keywordPlaceholder": {
+    "message": "Suchbegriff..."
+  },
+  "previousMatch": {
+    "message": "Vorheriger (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Nächster (Enter)"
+  },
+  "highlightColor": {
+    "message": "Markierungsfarbe"
+  },
+  "matchCase": {
+    "message": "Groß-/Kleinschreibung beachten"
+  },
+  "wholeWord": {
+    "message": "Ganzes Wort"
+  },
+  "remove": {
+    "message": "Entfernen"
+  },
+  "emptyState": {
+    "message": "Klicke auf „Begriff hinzufügen“, um zu beginnen"
+  },
+  "pageNotSupported": {
+    "message": "Chrome erlaubt auf dieser Seite keine Erweiterungen."
+  },
+  "connectError": {
+    "message": "Die Seite ist nicht erreichbar. Lade sie neu und versuche es noch einmal."
+  }
+}

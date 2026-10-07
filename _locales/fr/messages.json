@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Recherchez plusieurs mots à la fois, chacun dans sa couleur, avec respect de la casse et mot entier pour chaque mot."
+  },
+  "popupTitle": {
+    "message": "Rechercher et surligner"
+  },
+  "autoHighlight": {
+    "message": "Surligner automatiquement sur ce site"
+  },
+  "addKeyword": {
+    "message": "Ajouter un mot"
+  },
+  "clearAll": {
+    "message": "Tout effacer"
+  },
+  "clearConfirm": {
+    "message": "Cliquez à nouveau pour effacer"
+  },
+  "keywordPlaceholder": {
+    "message": "Mot-clé..."
+  },
+  "previousMatch": {
+    "message": "Précédent (Maj+Entrée)"
+  },
+  "nextMatch": {
+    "message": "Suivant (Entrée)"
+  },
+  "highlightColor": {
+    "message": "Couleur de surlignage"
+  },
+  "matchCase": {
+    "message": "Respecter la casse"
+  },
+  "wholeWord": {
+    "message": "Mot entier"
+  },
+  "remove": {
+    "message": "Supprimer"
+  },
+  "emptyState": {
+    "message": "Cliquez sur « Ajouter un mot » pour commencer"
+  },
+  "pageNotSupported": {
+    "message": "Chrome n'autorise pas les extensions sur cette page."
+  },
+  "connectError": {
+    "message": "Impossible d'accéder à la page. Actualisez-la et réessayez."
+  }
+}

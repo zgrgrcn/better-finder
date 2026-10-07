@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Tìm nhiều từ khóa cùng lúc, mỗi từ một màu, với tùy chọn phân biệt hoa/thường và nguyên từ."
+  },
+  "popupTitle": {
+    "message": "Tìm và tô sáng"
+  },
+  "autoHighlight": {
+    "message": "Tự động tô sáng trên trang này"
+  },
+  "addKeyword": {
+    "message": "Thêm từ khóa"
+  },
+  "clearAll": {
+    "message": "Xóa tất cả"
+  },
+  "clearConfirm": {
+    "message": "Nhấp lần nữa để xóa"
+  },
+  "keywordPlaceholder": {
+    "message": "Từ khóa..."
+  },
+  "previousMatch": {
+    "message": "Trước (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Tiếp (Enter)"
+  },
+  "highlightColor": {
+    "message": "Màu tô sáng"
+  },
+  "matchCase": {
+    "message": "Phân biệt hoa/thường"
+  },
+  "wholeWord": {
+    "message": "Nguyên từ"
+  },
+  "remove": {
+    "message": "Gỡ bỏ"
+  },
+  "emptyState": {
+    "message": "Nhấp \"Thêm từ khóa\" để bắt đầu"
+  },
+  "pageNotSupported": {
+    "message": "Chrome không cho phép tiện ích trên trang này."
+  },
+  "connectError": {
+    "message": "Không thể kết nối với trang. Hãy tải lại trang và thử lại."
+  }
+}

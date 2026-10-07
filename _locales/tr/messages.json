@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Birden fazla kelimeyi aynı anda arayın; her kelime kendi renginde, büyük/küçük harf ve tam kelime seçenekleriyle."
+  },
+  "popupTitle": {
+    "message": "Bul ve Vurgula"
+  },
+  "autoHighlight": {
+    "message": "Bu sitede otomatik vurgula"
+  },
+  "addKeyword": {
+    "message": "Kelime Ekle"
+  },
+  "clearAll": {
+    "message": "Tümünü Temizle"
+  },
+  "clearConfirm": {
+    "message": "Temizlemek için tekrar tıkla"
+  },
+  "keywordPlaceholder": {
+    "message": "Kelime..."
+  },
+  "previousMatch": {
+    "message": "Önceki (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Sonraki (Enter)"
+  },
+  "highlightColor": {
+    "message": "Vurgu rengi"
+  },
+  "matchCase": {
+    "message": "Büyük/küçük harfe duyarlı"
+  },
+  "wholeWord": {
+    "message": "Tam kelime"
+  },
+  "remove": {
+    "message": "Kaldır"
+  },
+  "emptyState": {
+    "message": "Başlamak için \"Kelime Ekle\"ye tıkla"
+  },
+  "pageNotSupported": {
+    "message": "Chrome bu sayfada eklentilere izin vermiyor."
+  },
+  "connectError": {
+    "message": "Sayfaya ulaşılamadı. Sayfayı yenileyip tekrar dene."
+  }
+}

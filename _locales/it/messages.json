@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Cerca più parole contemporaneamente, ognuna con il suo colore, con opzioni per maiuscole e parola intera."
+  },
+  "popupTitle": {
+    "message": "Trova ed evidenzia"
+  },
+  "autoHighlight": {
+    "message": "Evidenzia automaticamente su questo sito"
+  },
+  "addKeyword": {
+    "message": "Aggiungi parola"
+  },
+  "clearAll": {
+    "message": "Cancella tutto"
+  },
+  "clearConfirm": {
+    "message": "Fai clic di nuovo per cancellare"
+  },
+  "keywordPlaceholder": {
+    "message": "Parola..."
+  },
+  "previousMatch": {
+    "message": "Precedente (Maiusc+Invio)"
+  },
+  "nextMatch": {
+    "message": "Successivo (Invio)"
+  },
+  "highlightColor": {
+    "message": "Colore evidenziazione"
+  },
+  "matchCase": {
+    "message": "Maiuscole/minuscole"
+  },
+  "wholeWord": {
+    "message": "Parola intera"
+  },
+  "remove": {
+    "message": "Rimuovi"
+  },
+  "emptyState": {
+    "message": "Fai clic su \"Aggiungi parola\" per iniziare"
+  },
+  "pageNotSupported": {
+    "message": "Chrome non consente estensioni su questa pagina."
+  },
+  "connectError": {
+    "message": "Impossibile raggiungere la pagina. Ricaricala e riprova."
+  }
+}

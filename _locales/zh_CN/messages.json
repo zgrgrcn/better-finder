@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "同时搜索多个关键词，每个关键词使用不同颜色，并可单独设置区分大小写和全字匹配。"
+  },
+  "popupTitle": {
+    "message": "查找并高亮"
+  },
+  "autoHighlight": {
+    "message": "在此网站自动高亮"
+  },
+  "addKeyword": {
+    "message": "添加关键词"
+  },
+  "clearAll": {
+    "message": "全部清除"
+  },
+  "clearConfirm": {
+    "message": "再次点击以清除"
+  },
+  "keywordPlaceholder": {
+    "message": "关键词..."
+  },
+  "previousMatch": {
+    "message": "上一个 (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "下一个 (Enter)"
+  },
+  "highlightColor": {
+    "message": "高亮颜色"
+  },
+  "matchCase": {
+    "message": "区分大小写"
+  },
+  "wholeWord": {
+    "message": "全字匹配"
+  },
+  "remove": {
+    "message": "删除"
+  },
+  "emptyState": {
+    "message": "点击“添加关键词”开始"
+  },
+  "pageNotSupported": {
+    "message": "Chrome 不允许扩展程序在此页面上运行。"
+  },
+  "connectError": {
+    "message": "无法连接到页面。请刷新后重试。"
+  }
+}

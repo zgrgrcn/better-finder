@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "同時搜尋多個關鍵字，每個關鍵字使用不同顏色，並可個別設定區分大小寫與全字相符。"
+  },
+  "popupTitle": {
+    "message": "尋找並醒目提示"
+  },
+  "autoHighlight": {
+    "message": "在此網站自動醒目提示"
+  },
+  "addKeyword": {
+    "message": "新增關鍵字"
+  },
+  "clearAll": {
+    "message": "全部清除"
+  },
+  "clearConfirm": {
+    "message": "再按一次以清除"
+  },
+  "keywordPlaceholder": {
+    "message": "關鍵字..."
+  },
+  "previousMatch": {
+    "message": "上一個 (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "下一個 (Enter)"
+  },
+  "highlightColor": {
+    "message": "醒目提示顏色"
+  },
+  "matchCase": {
+    "message": "區分大小寫"
+  },
+  "wholeWord": {
+    "message": "全字相符"
+  },
+  "remove": {
+    "message": "移除"
+  },
+  "emptyState": {
+    "message": "按一下「新增關鍵字」開始"
+  },
+  "pageNotSupported": {
+    "message": "Chrome 不允許擴充功能在此頁面上執行。"
+  },
+  "connectError": {
+    "message": "無法連線到頁面。請重新整理後再試一次。"
+  }
+}

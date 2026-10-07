@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Pesquise várias palavras ao mesmo tempo, cada uma com sua cor, com opções de maiúsculas e palavra inteira."
+  },
+  "popupTitle": {
+    "message": "Localizar e destacar"
+  },
+  "autoHighlight": {
+    "message": "Destacar automaticamente neste site"
+  },
+  "addKeyword": {
+    "message": "Adicionar palavra"
+  },
+  "clearAll": {
+    "message": "Limpar tudo"
+  },
+  "clearConfirm": {
+    "message": "Clique de novo para limpar"
+  },
+  "keywordPlaceholder": {
+    "message": "Palavra..."
+  },
+  "previousMatch": {
+    "message": "Anterior (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Próximo (Enter)"
+  },
+  "highlightColor": {
+    "message": "Cor do destaque"
+  },
+  "matchCase": {
+    "message": "Diferenciar maiúsculas"
+  },
+  "wholeWord": {
+    "message": "Palavra inteira"
+  },
+  "remove": {
+    "message": "Remover"
+  },
+  "emptyState": {
+    "message": "Clique em \"Adicionar palavra\" para começar"
+  },
+  "pageNotSupported": {
+    "message": "O Chrome não permite extensões nesta página."
+  },
+  "connectError": {
+    "message": "Não foi possível acessar a página. Recarregue e tente de novo."
+  }
+}

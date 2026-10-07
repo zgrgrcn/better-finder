@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "Wyszukuj kilka słów naraz, każde w innym kolorze, z opcjami wielkości liter i całych słów."
+  },
+  "popupTitle": {
+    "message": "Znajdź i wyróżnij"
+  },
+  "autoHighlight": {
+    "message": "Wyróżniaj automatycznie na tej stronie"
+  },
+  "addKeyword": {
+    "message": "Dodaj słowo"
+  },
+  "clearAll": {
+    "message": "Wyczyść wszystko"
+  },
+  "clearConfirm": {
+    "message": "Kliknij ponownie, aby wyczyścić"
+  },
+  "keywordPlaceholder": {
+    "message": "Słowo..."
+  },
+  "previousMatch": {
+    "message": "Poprzednie (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "Następne (Enter)"
+  },
+  "highlightColor": {
+    "message": "Kolor wyróżnienia"
+  },
+  "matchCase": {
+    "message": "Uwzględniaj wielkość liter"
+  },
+  "wholeWord": {
+    "message": "Całe słowo"
+  },
+  "remove": {
+    "message": "Usuń"
+  },
+  "emptyState": {
+    "message": "Kliknij „Dodaj słowo”, aby zacząć"
+  },
+  "pageNotSupported": {
+    "message": "Chrome nie pozwala na rozszerzenia na tej stronie."
+  },
+  "connectError": {
+    "message": "Nie można połączyć się ze stroną. Odśwież ją i spróbuj ponownie."
+  }
+}

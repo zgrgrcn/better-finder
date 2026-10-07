@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "একসাথে একাধিক শব্দ খুঁজুন, প্রতিটি নিজের রঙে, বড়/ছোট হাতের অক্ষর ও পুরো শব্দের বিকল্পসহ।"
+  },
+  "popupTitle": {
+    "message": "খুঁজুন ও হাইলাইট করুন"
+  },
+  "autoHighlight": {
+    "message": "এই সাইটে স্বয়ংক্রিয়ভাবে হাইলাইট করুন"
+  },
+  "addKeyword": {
+    "message": "শব্দ যোগ করুন"
+  },
+  "clearAll": {
+    "message": "সব মুছুন"
+  },
+  "clearConfirm": {
+    "message": "মুছতে আবার ক্লিক করুন"
+  },
+  "keywordPlaceholder": {
+    "message": "শব্দ..."
+  },
+  "previousMatch": {
+    "message": "আগের (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "পরের (Enter)"
+  },
+  "highlightColor": {
+    "message": "হাইলাইটের রং"
+  },
+  "matchCase": {
+    "message": "বড়/ছোট হাতের অক্ষর মেলান"
+  },
+  "wholeWord": {
+    "message": "পুরো শব্দ"
+  },
+  "remove": {
+    "message": "সরান"
+  },
+  "emptyState": {
+    "message": "শুরু করতে \"শব্দ যোগ করুন\"-এ ক্লিক করুন"
+  },
+  "pageNotSupported": {
+    "message": "Chrome এই পৃষ্ঠায় এক্সটেনশন চালাতে দেয় না।"
+  },
+  "connectError": {
+    "message": "পৃষ্ঠায় পৌঁছানো যায়নি। পৃষ্ঠাটি রিফ্রেশ করে আবার চেষ্টা করুন।"
+  }
+}

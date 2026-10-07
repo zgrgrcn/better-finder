@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "एक साथ कई शब्द खोजें, हर शब्द अपने रंग में, केस और पूरे शब्द के विकल्पों के साथ।"
+  },
+  "popupTitle": {
+    "message": "ढूँढें और हाइलाइट करें"
+  },
+  "autoHighlight": {
+    "message": "इस साइट पर अपने-आप हाइलाइट करें"
+  },
+  "addKeyword": {
+    "message": "शब्द जोड़ें"
+  },
+  "clearAll": {
+    "message": "सब साफ़ करें"
+  },
+  "clearConfirm": {
+    "message": "साफ़ करने के लिए फिर से क्लिक करें"
+  },
+  "keywordPlaceholder": {
+    "message": "शब्द..."
+  },
+  "previousMatch": {
+    "message": "पिछला (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "अगला (Enter)"
+  },
+  "highlightColor": {
+    "message": "हाइलाइट का रंग"
+  },
+  "matchCase": {
+    "message": "अक्षरों का केस मिलाएँ"
+  },
+  "wholeWord": {
+    "message": "पूरा शब्द"
+  },
+  "remove": {
+    "message": "हटाएँ"
+  },
+  "emptyState": {
+    "message": "शुरू करने के लिए \"शब्द जोड़ें\" पर क्लिक करें"
+  },
+  "pageNotSupported": {
+    "message": "Chrome इस पेज पर एक्सटेंशन की अनुमति नहीं देता।"
+  },
+  "connectError": {
+    "message": "पेज तक नहीं पहुँच सके। पेज रीफ़्रेश करके फिर से कोशिश करें।"
+  }
+}

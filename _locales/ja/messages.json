@@ -1,0 +1,50 @@
+{
+  "extDescription": {
+    "message": "複数のキーワードを同時に検索し、それぞれ別の色でハイライト。大文字小文字の区別と単語単位の検索に対応。"
+  },
+  "popupTitle": {
+    "message": "検索してハイライト"
+  },
+  "autoHighlight": {
+    "message": "このサイトで自動的にハイライト"
+  },
+  "addKeyword": {
+    "message": "キーワードを追加"
+  },
+  "clearAll": {
+    "message": "すべてクリア"
+  },
+  "clearConfirm": {
+    "message": "もう一度クリックしてクリア"
+  },
+  "keywordPlaceholder": {
+    "message": "キーワード..."
+  },
+  "previousMatch": {
+    "message": "前へ (Shift+Enter)"
+  },
+  "nextMatch": {
+    "message": "次へ (Enter)"
+  },
+  "highlightColor": {
+    "message": "ハイライトの色"
+  },
+  "matchCase": {
+    "message": "大文字と小文字を区別"
+  },
+  "wholeWord": {
+    "message": "単語単位"
+  },
+  "remove": {
+    "message": "削除"
+  },
+  "emptyState": {
+    "message": "「キーワードを追加」をクリックして開始"
+  },
+  "pageNotSupported": {
+    "message": "Chrome はこのページで拡張機能を許可していません。"
+  },
+  "connectError": {
+    "message": "ページに接続できませんでした。再読み込みしてもう一度お試しください。"
+  }
+}

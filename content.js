@@ -1,96 +1,284 @@
-// Store highlight markers for easy removal
-let highlightMarkers = [];
-let highlightsByKeyword = {}; // Track highlights per keyword
-let currentIndexByKeyword = {}; // Track current position per keyword
-let floatingUI = null;
-let isCommandFListenerActive = true;
+// Injected both by the popup (activeTab) and by the auto-highlight content
+// script, so guard against running twice in the same page.
+if (!window.__betterFinderLoaded) {
+  window.__betterFinderLoaded = true;
 
-// Listen for messages from popup and background
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'ping') {
-    sendResponse({ success: true });
+  let activeKeywords = []; // Keyword configs currently applied to the page
+  let highlightsByKeyword = {}; // Track highlights per keyword, in document order
+  let currentIndexByKeyword = {}; // Track current position per keyword
+  const pendingRoots = new Set(); // Nodes added by the page since the last pass
+  let pendingTimer = null;
+
+  // Letters, marks and digits of every script, not just ASCII like \b
+  const WORD_CHAR = /[\p{L}\p{M}\p{N}_]/u;
+  // Scripts written without spaces: word edges come from Intl.Segmenter
+  const NO_SPACE_CHAR = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Thai}\p{Script=Lao}\p{Script=Khmer}\p{Script=Myanmar}]/u;
+  const segmenter = typeof Intl.Segmenter === 'function'
+    ? new Intl.Segmenter(undefined, { granularity: 'word' })
+    : null;
+
+  const SKIPPED_TAGS = new Set(['script', 'style', 'noscript', 'textarea', 'template', 'select', 'option']);
+
+  // Highlight content the page adds later (infinite scroll, SPA navigation)
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('better-finder-highlight')) return;
+        if (node.nodeType === Node.ELEMENT_NODE || node.nodeType === Node.TEXT_NODE) {
+          pendingRoots.add(node);
+        }
+      });
+    });
+    if (pendingRoots.size === 0) return;
+    clearTimeout(pendingTimer);
+    pendingTimer = setTimeout(highlightPending, 300);
+  });
+
+  // Listen for messages from popup
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === 'ping') {
+      sendResponse({ success: true });
+    } else if (request.action === 'highlight') {
+      // keepIfSame: the popup just opened, don't redo what the page already shows
+      if (!(request.keepIfSame && sameKeywords(request.keywords, activeKeywords))) {
+        applyKeywords(request.keywords, { scroll: request.scroll });
+      }
+      sendResponse({ success: true, matchCounts: getMatchCounts() });
+    } else if (request.action === 'clear') {
+      applyKeywords([], { scroll: false });
+      sendResponse({ success: true });
+    } else if (request.action === 'navigateToMatch') {
+      const result = navigateToMatch(request.keywordId, request.direction);
+      sendResponse({ success: true, ...result });
+    } else if (request.action === 'getMatchCounts') {
+      sendResponse({ success: true, matchCounts: getMatchCounts() });
+    } else {
+      return false;
+    }
     return true;
-  } else if (request.action === 'highlight') {
-    const matchCounts = highlightKeywords(request.keywords);
-    sendResponse({ success: true, matchCounts });
-    return true;
-  } else if (request.action === 'clear') {
-    clearAllHighlights();
-    sendResponse({ success: true });
-    return true;
-  } else if (request.action === 'toggleFloatingUI') {
-    toggleFloatingUI();
-    sendResponse({ success: true });
-    return true;
-  } else if (request.action === 'navigateToMatch') {
-    const result = navigateToMatch(request.keywordId, request.direction);
-    sendResponse({ success: true, ...result });
-    return true;
-  } else if (request.action === 'getMatchCounts') {
+  });
+
+  function sameKeywords(a, b) {
+    return JSON.stringify(a || []) === JSON.stringify(b || []);
+  }
+
+  function getMatchCounts() {
+    pruneDetached();
     const counts = {};
     Object.keys(highlightsByKeyword).forEach(id => {
-      counts[id] = {
-        total: highlightsByKeyword[id].length,
-        current: currentIndexByKeyword[id] + 1
-      };
+      const total = highlightsByKeyword[id].length;
+      counts[id] = { total, current: total > 0 ? currentIndexByKeyword[id] + 1 : 0 };
     });
-    sendResponse({ success: true, matchCounts: counts });
-    return true;
-  }
-  return false;
-});
-
-// Navigate to next/previous match for a keyword
-function navigateToMatch(keywordId, direction) {
-  // Ensure keywordId is string for consistent object key access
-  const id = String(keywordId);
-  const highlights = highlightsByKeyword[id];
-  if (!highlights || highlights.length === 0) {
-    return { current: 0, total: 0 };
+    return counts;
   }
 
-  let currentIndex = currentIndexByKeyword[id] || 0;
+  // Navigate to next/previous match for a keyword
+  function navigateToMatch(keywordId, direction) {
+    pruneDetached();
+    // Ensure keywordId is string for consistent object key access
+    const id = String(keywordId);
+    const highlights = highlightsByKeyword[id];
+    if (!highlights || highlights.length === 0) {
+      return { current: 0, total: 0 };
+    }
 
-  // Remove active class from current
-  if (highlights[currentIndex]) {
-    highlights[currentIndex].classList.remove('better-finder-active');
-  }
+    let currentIndex = currentIndexByKeyword[id] || 0;
 
-  // Calculate new index
-  if (direction === 'next') {
-    currentIndex = (currentIndex + 1) % highlights.length;
-  } else if (direction === 'prev') {
-    currentIndex = (currentIndex - 1 + highlights.length) % highlights.length;
-  }
+    // Remove active class from current
+    if (highlights[currentIndex]) {
+      highlights[currentIndex].classList.remove('better-finder-active');
+    }
 
-  currentIndexByKeyword[id] = currentIndex;
+    // Calculate new index
+    if (direction === 'next') {
+      currentIndex = (currentIndex + 1) % highlights.length;
+    } else if (direction === 'prev') {
+      currentIndex = (currentIndex - 1 + highlights.length) % highlights.length;
+    }
 
-  // Add active class and scroll to new current
-  const currentHighlight = highlights[currentIndex];
-  if (currentHighlight) {
+    currentIndexByKeyword[id] = currentIndex;
+
+    // Add active class and scroll to new current
+    const currentHighlight = highlights[currentIndex];
     currentHighlight.classList.add('better-finder-active');
     currentHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    return {
+      current: currentIndex + 1,
+      total: highlights.length
+    };
   }
 
-  return {
-    current: currentIndex + 1,
-    total: highlights.length
-  };
-}
+  // Replace all highlights with the given keywords
+  function applyKeywords(keywords, { scroll }) {
+    clearAllHighlights();
+    activeKeywords = (keywords || []).filter(k => k.keyword && k.keyword.trim() !== '');
 
-// Highlight keywords in the page
-function highlightKeywords(keywords) {
-  // Clear existing highlights first
-  clearAllHighlights();
+    if (activeKeywords.length === 0 || !document.body) {
+      observer.disconnect();
+      return;
+    }
 
-  const matchCounts = {};
+    injectStyles();
 
-  if (!keywords || keywords.length === 0) {
-    return matchCounts;
+    activeKeywords.forEach(config => {
+      const id = String(config.id);
+      highlightsByKeyword[id] = [];
+      currentIndexByKeyword[id] = 0;
+    });
+
+    highlightIn(document.body);
+
+    // Mark first match of each keyword as active
+    Object.values(highlightsByKeyword).forEach(highlights => {
+      if (highlights.length > 0) {
+        highlights[0].classList.add('better-finder-active');
+      }
+    });
+
+    // Scroll to first highlight of first keyword with matches
+    if (scroll) {
+      for (const config of activeKeywords) {
+        const highlights = highlightsByKeyword[String(config.id)];
+        if (highlights.length > 0) {
+          highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          break;
+        }
+      }
+    }
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    // Our own <mark> insertions are not page changes
+    observer.takeRecords();
   }
 
-  // Add CSS for active highlight if not exists
-  if (!document.getElementById('better-finder-styles')) {
+  // Highlight every active keyword inside root
+  function highlightIn(root) {
+    activeKeywords.forEach(config => {
+      const id = String(config.id);
+      const regex = buildRegex(config.keyword.trim(), config.matchCase);
+      const marks = [];
+
+      collectTextNodes(root).forEach(textNode => {
+        const text = textNode.textContent;
+        let boundaries = null;
+        const matches = [...text.matchAll(regex)].filter(match => {
+          if (!config.wholeWord) return true;
+          const start = match.index;
+          const end = start + match[0].length;
+          if (!boundaries && (needsSegmenter(text, start) || needsSegmenter(text, end))) {
+            boundaries = segmentBoundaries(text);
+          }
+          return isWordEdge(text, start, boundaries) && isWordEdge(text, end, boundaries);
+        });
+
+        if (matches.length === 0) return;
+
+        const fragment = document.createDocumentFragment();
+        let lastIndex = 0;
+
+        matches.forEach(match => {
+          if (match.index > lastIndex) {
+            fragment.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+          }
+
+          const mark = document.createElement('mark');
+          mark.className = 'better-finder-highlight';
+          mark.dataset.keywordId = id;
+          mark.style.backgroundColor = config.color;
+          mark.style.color = getContrastColor(config.color);
+          mark.textContent = match[0];
+          fragment.appendChild(mark);
+          marks.push(mark);
+
+          lastIndex = match.index + match[0].length;
+        });
+
+        if (lastIndex < text.length) {
+          fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+        }
+
+        textNode.parentNode.replaceChild(fragment, textNode);
+      });
+
+      highlightsByKeyword[id].push(...marks);
+    });
+  }
+
+  function collectTextNodes(root) {
+    if (root.nodeType === Node.TEXT_NODE) {
+      return acceptTextNode(root) === NodeFilter.FILTER_ACCEPT ? [root] : [];
+    }
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: acceptTextNode });
+    const textNodes = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      textNodes.push(node);
+    }
+    return textNodes;
+  }
+
+  function acceptTextNode(node) {
+    const parent = node.parentElement;
+    if (!parent) return NodeFilter.FILTER_REJECT;
+    if (SKIPPED_TAGS.has(parent.tagName.toLowerCase())) return NodeFilter.FILTER_REJECT;
+    if (parent.closest('.better-finder-highlight')) return NodeFilter.FILTER_REJECT;
+    // Wrapping text inside an editor would corrupt what the user is typing
+    if (parent.isContentEditable) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;
+  }
+
+  // Build a literal, Unicode-aware pattern for one keyword
+  function buildRegex(keyword, matchCase) {
+    let pattern = escapeRegExp(keyword);
+    if (!matchCase) {
+      // Unicode case folding keeps dotted and dotless i apart; Turkish readers expect them to match
+      pattern = pattern.replace(/[iIıİ]/g, '[iIıİ]');
+    }
+    return new RegExp(pattern, matchCase ? 'gu' : 'giu');
+  }
+
+  function charBefore(text, index) {
+    if (index <= 0) return '';
+    const code = text.charCodeAt(index - 1);
+    const isLowSurrogate = code >= 0xdc00 && code <= 0xdfff;
+    return isLowSurrogate && index >= 2 ? text.slice(index - 2, index) : text[index - 1];
+  }
+
+  function charAt(text, index) {
+    if (index >= text.length) return '';
+    return String.fromCodePoint(text.codePointAt(index));
+  }
+
+  function needsSegmenter(text, index) {
+    return NO_SPACE_CHAR.test(charBefore(text, index)) || NO_SPACE_CHAR.test(charAt(text, index));
+  }
+
+  function segmentBoundaries(text) {
+    const boundaries = new Set([0, text.length]);
+    if (segmenter) {
+      for (const { index, segment } of segmenter.segment(text)) {
+        boundaries.add(index);
+        boundaries.add(index + segment.length);
+      }
+    }
+    return boundaries;
+  }
+
+  // True when a word starts or ends at index
+  function isWordEdge(text, index, boundaries) {
+    const before = charBefore(text, index);
+    const after = charAt(text, index);
+    if (!before || !after) return true;
+    if (NO_SPACE_CHAR.test(before) || NO_SPACE_CHAR.test(after)) {
+      // Without Intl.Segmenter there is no way to tell, so don't drop the match
+      return boundaries && segmenter ? boundaries.has(index) : true;
+    }
+    return !(WORD_CHAR.test(before) && WORD_CHAR.test(after));
+  }
+
+  function injectStyles() {
+    if (document.getElementById('better-finder-styles')) return;
     const style = document.createElement('style');
     style.id = 'better-finder-styles';
     style.textContent = `
@@ -132,281 +320,115 @@ function highlightKeywords(keywords) {
         100% { background-position: 0% 50%; }
       }
       @keyframes borderPulse {
-        0%, 100% { 
+        0%, 100% {
           top: -4px; left: -4px; right: -4px; bottom: -4px;
           opacity: 1;
         }
-        50% { 
+        50% {
           top: -6px; left: -6px; right: -6px; bottom: -6px;
           opacity: 0.7;
         }
       }
     `;
-    document.head.appendChild(style);
+    (document.head || document.documentElement).appendChild(style);
   }
 
-  // Process each keyword
-  keywords.forEach(keywordConfig => {
-    const { id: rawId, keyword, color, matchCase, wholeWord } = keywordConfig;
-    // Ensure id is string for consistent object key access
-    const id = String(rawId);
+  // Get contrast color for text based on background
+  function getContrastColor(hexColor) {
+    const hex = hexColor.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.5 ? '#000000' : '#ffffff';
+  }
 
-    if (!keyword || keyword.trim() === '') {
-      matchCounts[id] = { total: 0, current: 0 };
-      return;
-    }
-
-    highlightsByKeyword[id] = [];
-    currentIndexByKeyword[id] = 0;
-
-    // Build regex pattern
-    let pattern = escapeRegExp(keyword);
-
-    if (wholeWord) {
-      pattern = `\\b${pattern}\\b`;
-    }
-
-    const flags = matchCase ? 'g' : 'gi';
-    const regex = new RegExp(pattern, flags);
-
-    // Find and highlight all matches
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: function(node) {
-          const parent = node.parentElement;
-          if (!parent) return NodeFilter.FILTER_REJECT;
-
-          const tagName = parent.tagName.toLowerCase();
-          if (tagName === 'script' || tagName === 'style' || tagName === 'noscript') {
-            return NodeFilter.FILTER_REJECT;
-          }
-
-          if (parent.classList.contains('better-finder-highlight')) {
-            return NodeFilter.FILTER_REJECT;
-          }
-
-          return NodeFilter.FILTER_ACCEPT;
-        }
-      }
-    );
-
-    const textNodes = [];
-    let node;
-    while (node = walker.nextNode()) {
-      textNodes.push(node);
-    }
-
-    // Process text nodes in reverse order to maintain DOM integrity
-    textNodes.reverse().forEach(textNode => {
-      const text = textNode.textContent;
-      const matches = [...text.matchAll(regex)];
-
-      if (matches.length > 0) {
-        const parent = textNode.parentNode;
-        const fragments = [];
-        let lastIndex = 0;
-
-        matches.forEach(match => {
-          if (match.index > lastIndex) {
-            fragments.push(document.createTextNode(text.substring(lastIndex, match.index)));
-          }
-
-          const mark = document.createElement('mark');
-          mark.className = 'better-finder-highlight';
-          mark.dataset.keywordId = id;
-          mark.style.backgroundColor = color;
-          mark.style.color = getContrastColor(color);
-          mark.textContent = match[0];
-          fragments.push(mark);
-          highlightMarkers.push(mark);
-          highlightsByKeyword[id].push(mark);
-
-          lastIndex = match.index + match[0].length;
-        });
-
-        if (lastIndex < text.length) {
-          fragments.push(document.createTextNode(text.substring(lastIndex)));
-        }
-
-        fragments.forEach(fragment => {
-          parent.insertBefore(fragment, textNode);
-        });
-        parent.removeChild(textNode);
+  // Clear all highlights
+  function clearAllHighlights() {
+    const parents = new Set();
+    document.querySelectorAll('mark.better-finder-highlight').forEach(mark => {
+      const parent = mark.parentNode;
+      if (parent) {
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parents.add(parent);
       }
     });
+    parents.forEach(parent => parent.normalize());
 
-    // Reverse the highlights array so first match on page is index 0
-    // (we processed text nodes in reverse order for DOM integrity)
-    highlightsByKeyword[id].reverse();
+    highlightsByKeyword = {};
+    currentIndexByKeyword = {};
+    pendingRoots.clear();
+    clearTimeout(pendingTimer);
+    observer.takeRecords();
+  }
 
-    // Set match count for this keyword
-    matchCounts[id] = {
-      total: highlightsByKeyword[id].length,
-      current: highlightsByKeyword[id].length > 0 ? 1 : 0
+  // Forget marks the page removed, keeping each keyword's current match
+  function pruneDetached() {
+    Object.keys(highlightsByKeyword).forEach(id => {
+      const highlights = highlightsByKeyword[id];
+      if (highlights.every(mark => mark.isConnected)) return;
+      const current = highlights[currentIndexByKeyword[id]];
+      highlightsByKeyword[id] = highlights.filter(mark => mark.isConnected);
+      const kept = highlightsByKeyword[id].indexOf(current);
+      currentIndexByKeyword[id] = kept >= 0 ? kept : 0;
+    });
+  }
+
+  function highlightPending() {
+    const roots = [...pendingRoots].filter(node => node.isConnected);
+    pendingRoots.clear();
+    if (roots.length === 0 || activeKeywords.length === 0) return;
+
+    const activeMarks = {};
+    Object.keys(highlightsByKeyword).forEach(id => {
+      activeMarks[id] = highlightsByKeyword[id][currentIndexByKeyword[id]];
+    });
+
+    // A root inside another root is covered when the outer one is walked
+    roots
+      .filter(node => !roots.some(other => other !== node && other.contains(node)))
+      .forEach(node => highlightIn(node));
+    observer.takeRecords();
+
+    // Keep matches in document order so next/previous follow the page
+    Object.keys(highlightsByKeyword).forEach(id => {
+      const highlights = highlightsByKeyword[id]
+        .filter(mark => mark.isConnected)
+        .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+      highlightsByKeyword[id] = highlights;
+      let index = highlights.indexOf(activeMarks[id]);
+      if (index < 0) {
+        index = 0;
+        if (highlights[0]) highlights[0].classList.add('better-finder-active');
+      }
+      currentIndexByKeyword[id] = index;
+    });
+  }
+
+  // Escape special regex characters
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // Same shape the popup sends, so the popup can tell nothing changed
+  function toConfig(row) {
+    return {
+      id: row.id,
+      keyword: (row.keyword || '').trim(),
+      color: row.color,
+      matchCase: !!row.matchCase,
+      wholeWord: !!row.wholeWord
     };
-
-    // Mark first match as active
-    if (highlightsByKeyword[id].length > 0) {
-      highlightsByKeyword[id][0].classList.add('better-finder-active');
-    }
-  });
-
-  // Scroll to first highlight of first keyword with matches
-  for (const keywordConfig of keywords) {
-    const highlights = highlightsByKeyword[String(keywordConfig.id)];
-    if (highlights && highlights.length > 0) {
-      highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-      break;
-    }
   }
 
-  return matchCounts;
-}
-
-// Get contrast color for text based on background
-function getContrastColor(hexColor) {
-  const hex = hexColor.replace('#', '');
-  const r = parseInt(hex.substr(0, 2), 16);
-  const g = parseInt(hex.substr(2, 2), 16);
-  const b = parseInt(hex.substr(4, 2), 16);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.5 ? '#000000' : '#ffffff';
-}
-
-// Clear all highlights
-function clearAllHighlights() {
-  highlightMarkers.forEach(marker => {
-    const parent = marker.parentNode;
-    if (parent) {
-      const textNode = document.createTextNode(marker.textContent);
-      parent.replaceChild(textNode, marker);
-      parent.normalize();
-    }
-  });
-
-  highlightMarkers = [];
-  highlightsByKeyword = {};
-  currentIndexByKeyword = {};
-}
-
-// Escape special regex characters
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-// Toggle floating UI for keyboard shortcut
-async function toggleFloatingUI() {
-  if (floatingUI) {
-    floatingUI.remove();
-    floatingUI = null;
-    return;
-  }
-
-  floatingUI = document.createElement('div');
-  floatingUI.id = 'better-finder-floating-ui';
-  floatingUI.innerHTML = `
-    <div style="
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 350px;
-      background: white;
-      border: 2px solid #4a4a4a;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 999999;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    ">
-      <div style="
-        background: #4a4a4a;
-        color: white;
-        padding: 12px;
-        font-weight: 600;
-        border-radius: 6px 6px 0 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      ">
-        <span>Find and Highlight</span>
-        <button id="close-floating-ui" style="
-          background: transparent;
-          border: none;
-          color: white;
-          font-size: 20px;
-          cursor: pointer;
-          padding: 0;
-          width: 24px;
-          height: 24px;
-          line-height: 24px;
-        ">×</button>
-      </div>
-      <div style="padding: 15px;">
-        <p style="margin: 0 0 15px 0; color: #666; font-size: 14px;">
-          Click the extension icon to open the full popup with keyword management.
-        </p>
-        <button id="open-popup-btn" style="
-          width: 100%;
-          padding: 10px;
-          background: #3498db;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 500;
-        ">Open Extension Popup</button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(floatingUI);
-
-  floatingUI.querySelector('#close-floating-ui').addEventListener('click', () => {
-    floatingUI.remove();
-    floatingUI = null;
-  });
-
-  floatingUI.querySelector('#open-popup-btn').addEventListener('click', () => {
-    floatingUI.remove();
-    floatingUI = null;
-    alert('Please click the Better Finder extension icon in the toolbar to open the popup.');
-  });
-
-  setTimeout(() => {
-    document.addEventListener('click', function closeOnOutsideClick(e) {
-      if (floatingUI && !floatingUI.contains(e.target)) {
-        floatingUI.remove();
-        floatingUI = null;
-        document.removeEventListener('click', closeOnOutsideClick);
+  // auto.js runs first on sites where the user turned on auto-highlight
+  if (window.__betterFinderAuto) {
+    const key = `keywords_${location.hostname}`;
+    chrome.storage.local.get(key).then(result => {
+      const saved = (result[key] || []).map(toConfig);
+      if (activeKeywords.length === 0) {
+        applyKeywords(saved, { scroll: false });
       }
     });
-  }, 100);
+  }
 }
-
-// Listen for Command+F / Ctrl+F to open floating UI
-if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id) {
-  document.addEventListener('keydown', (e) => {
-    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-    const isCommandF = isMac ? (e.metaKey && e.key === 'f') : (e.ctrlKey && e.key === 'f');
-
-    if (isCommandF && isCommandFListenerActive) {
-      setTimeout(() => {
-        if (!floatingUI) {
-          toggleFloatingUI();
-        }
-      }, 100);
-    }
-  }, true);
-}
-
-// Handle dynamic content (e.g., SPAs)
-const observer = new MutationObserver((mutations) => {
-  // Optionally re-highlight when content changes
-});
-
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
