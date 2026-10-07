@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Không thể kết nối với trang. Hãy tải lại trang và thử lại."
+  },
+  "theme": {
+    "message": "Giao diện"
+  },
+  "themeAuto": {
+    "message": "Tự động"
+  },
+  "themeLight": {
+    "message": "Sáng"
+  },
+  "themeDark": {
+    "message": "Tối"
   }
 }

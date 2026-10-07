@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Не удалось подключиться к странице. Обновите её и попробуйте снова."
+  },
+  "theme": {
+    "message": "Тема"
+  },
+  "themeAuto": {
+    "message": "Авто"
+  },
+  "themeLight": {
+    "message": "Светлая"
+  },
+  "themeDark": {
+    "message": "Тёмная"
   }
 }

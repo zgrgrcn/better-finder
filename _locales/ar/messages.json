@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "تعذّر الوصول إلى الصفحة. أعد تحميلها وحاول مرة أخرى."
+  },
+  "theme": {
+    "message": "المظهر"
+  },
+  "themeAuto": {
+    "message": "تلقائي"
+  },
+  "themeLight": {
+    "message": "فاتح"
+  },
+  "themeDark": {
+    "message": "داكن"
   }
 }

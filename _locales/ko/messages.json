@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "페이지에 연결할 수 없습니다. 새로고침한 후 다시 시도하세요."
+  },
+  "theme": {
+    "message": "테마"
+  },
+  "themeAuto": {
+    "message": "자동"
+  },
+  "themeLight": {
+    "message": "라이트"
+  },
+  "themeDark": {
+    "message": "다크"
   }
 }

@@ -50,5 +50,6 @@ Transform your web browsing experience with Better Finder, a powerful Chrome ext
 - No tracking or analytics
 - Open source: https://github.com/zgrgrcn/better-finder
 - The interface is available in 24 languages
+- Light, dark and editor-style themes (VS Code, Darcula, Claude), or follow the system setting
 
 Enhance your productivity and make web searching more efficient with Better Finder!

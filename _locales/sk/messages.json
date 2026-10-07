@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Stránka nie je dostupná. Obnovte ju a skúste to znova."
+  },
+  "theme": {
+    "message": "Motív"
+  },
+  "themeAuto": {
+    "message": "Automaticky"
+  },
+  "themeLight": {
+    "message": "Svetlý"
+  },
+  "themeDark": {
+    "message": "Tmavý"
   }
 }

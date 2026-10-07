@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "No se pudo acceder a la página. Recárgala e inténtalo de nuevo."
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeAuto": {
+    "message": "Automático"
+  },
+  "themeLight": {
+    "message": "Claro"
+  },
+  "themeDark": {
+    "message": "Oscuro"
   }
 }

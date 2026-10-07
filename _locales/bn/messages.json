@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "পৃষ্ঠায় পৌঁছানো যায়নি। পৃষ্ঠাটি রিফ্রেশ করে আবার চেষ্টা করুন।"
+  },
+  "theme": {
+    "message": "থিম"
+  },
+  "themeAuto": {
+    "message": "স্বয়ংক্রিয়"
+  },
+  "themeLight": {
+    "message": "হালকা"
+  },
+  "themeDark": {
+    "message": "গাঢ়"
   }
 }

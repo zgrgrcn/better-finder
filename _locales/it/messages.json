@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Impossibile raggiungere la pagina. Ricaricala e riprova."
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeAuto": {
+    "message": "Automatico"
+  },
+  "themeLight": {
+    "message": "Chiaro"
+  },
+  "themeDark": {
+    "message": "Scuro"
   }
 }

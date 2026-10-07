@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "无法连接到页面。请刷新后重试。"
+  },
+  "theme": {
+    "message": "主题"
+  },
+  "themeAuto": {
+    "message": "自动"
+  },
+  "themeLight": {
+    "message": "浅色"
+  },
+  "themeDark": {
+    "message": "深色"
   }
 }

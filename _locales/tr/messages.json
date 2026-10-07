@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Sayfaya ulaşılamadı. Sayfayı yenileyip tekrar dene."
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeAuto": {
+    "message": "Otomatik"
+  },
+  "themeLight": {
+    "message": "Açık"
+  },
+  "themeDark": {
+    "message": "Koyu"
   }
 }

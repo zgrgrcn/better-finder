@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Die Seite ist nicht erreichbar. Lade sie neu und versuche es noch einmal."
+  },
+  "theme": {
+    "message": "Design"
+  },
+  "themeAuto": {
+    "message": "Automatisch"
+  },
+  "themeLight": {
+    "message": "Hell"
+  },
+  "themeDark": {
+    "message": "Dunkel"
   }
 }

@@ -49,5 +49,17 @@
   },
   "connectError": {
     "message": "Couldn't reach the page. Refresh it and try again."
+  },
+  "theme": {
+    "message": "Theme"
+  },
+  "themeAuto": {
+    "message": "Auto"
+  },
+  "themeLight": {
+    "message": "Light"
+  },
+  "themeDark": {
+    "message": "Dark"
   }
 }

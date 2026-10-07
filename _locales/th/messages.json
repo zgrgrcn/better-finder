@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "ไม่สามารถเชื่อมต่อกับหน้าเว็บได้ โปรดรีเฟรชแล้วลองอีกครั้ง"
+  },
+  "theme": {
+    "message": "ธีม"
+  },
+  "themeAuto": {
+    "message": "อัตโนมัติ"
+  },
+  "themeLight": {
+    "message": "สว่าง"
+  },
+  "themeDark": {
+    "message": "มืด"
   }
 }

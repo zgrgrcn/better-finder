@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Nie można połączyć się ze stroną. Odśwież ją i spróbuj ponownie."
+  },
+  "theme": {
+    "message": "Motyw"
+  },
+  "themeAuto": {
+    "message": "Automatyczny"
+  },
+  "themeLight": {
+    "message": "Jasny"
+  },
+  "themeDark": {
+    "message": "Ciemny"
   }
 }

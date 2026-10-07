@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Impossible d'accéder à la page. Actualisez-la et réessayez."
+  },
+  "theme": {
+    "message": "Thème"
+  },
+  "themeAuto": {
+    "message": "Auto"
+  },
+  "themeLight": {
+    "message": "Clair"
+  },
+  "themeDark": {
+    "message": "Sombre"
   }
 }

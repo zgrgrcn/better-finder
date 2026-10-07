@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "पेज तक नहीं पहुँच सके। पेज रीफ़्रेश करके फिर से कोशिश करें।"
+  },
+  "theme": {
+    "message": "थीम"
+  },
+  "themeAuto": {
+    "message": "अपने-आप"
+  },
+  "themeLight": {
+    "message": "हल्की"
+  },
+  "themeDark": {
+    "message": "गहरी"
   }
 }

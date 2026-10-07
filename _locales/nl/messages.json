@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "Kan de pagina niet bereiken. Vernieuw de pagina en probeer het opnieuw."
+  },
+  "theme": {
+    "message": "Thema"
+  },
+  "themeAuto": {
+    "message": "Automatisch"
+  },
+  "themeLight": {
+    "message": "Licht"
+  },
+  "themeDark": {
+    "message": "Donker"
   }
 }

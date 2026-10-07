@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "無法連線到頁面。請重新整理後再試一次。"
+  },
+  "theme": {
+    "message": "主題"
+  },
+  "themeAuto": {
+    "message": "自動"
+  },
+  "themeLight": {
+    "message": "淺色"
+  },
+  "themeDark": {
+    "message": "深色"
   }
 }

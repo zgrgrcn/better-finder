@@ -5,11 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="popupTitle">Find and Highlight</title>
   <link rel="stylesheet" href="popup.css">
+  <script src="theme.js"></script>
 </head>
 <body>
   <div class="container">
     <header>
       <h1 data-i18n="popupTitle">Find and Highlight</h1>
+      <select class="theme-select" id="themeSelect" data-i18n-title="theme">
+        <option value="auto" data-i18n="themeAuto">Auto</option>
+        <option value="light" data-i18n="themeLight">Light</option>
+        <option value="dark" data-i18n="themeDark">Dark</option>
+        <option value="vscode">VS Code</option>
+        <option value="darcula">Darcula</option>
+        <option value="claude">Claude</option>
+      </select>
     </header>
 
     <label class="auto-toggle" id="autoToggleRow" hidden>

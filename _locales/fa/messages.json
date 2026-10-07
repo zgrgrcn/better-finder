@@ -46,5 +46,17 @@
   },
   "connectError": {
     "message": "دسترسی به صفحه ممکن نشد. صفحه را تازه کنید و دوباره امتحان کنید."
+  },
+  "theme": {
+    "message": "پوسته"
+  },
+  "themeAuto": {
+    "message": "خودکار"
+  },
+  "themeLight": {
+    "message": "روشن"
+  },
+  "themeDark": {
+    "message": "تیره"
   }
 }

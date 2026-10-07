@@ -22,6 +22,7 @@ let clearTimer = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   localize();
+  setupThemeSelect();
 
   [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -47,6 +48,28 @@ function localize() {
   document.documentElement.dir = t('@@bidi_dir') || 'ltr';
   document.querySelectorAll('[data-i18n]').forEach(element => {
     element.textContent = t(element.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(element => {
+    element.title = t(element.dataset.i18nTitle);
+    element.setAttribute('aria-label', element.title);
+  });
+}
+
+// theme.js already applied the saved theme; this keeps the picker in sync
+function setupThemeSelect() {
+  const select = document.getElementById('themeSelect');
+  select.value = document.documentElement.dataset.theme || 'auto';
+  select.addEventListener('change', () => {
+    applyTheme(select.value);
+    try {
+      if (select.value === 'auto') {
+        localStorage.removeItem('theme');
+      } else {
+        localStorage.setItem('theme', select.value);
+      }
+    } catch (error) {
+      console.error('Error saving theme:', error);
+    }
   });
 }
 
