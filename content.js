@@ -112,9 +112,12 @@ if (!window.__betterFinderLoaded) {
   // Replace all highlights with the given keywords
   function applyKeywords(keywords, { scroll }) {
     clearAllHighlights();
-    activeKeywords = (keywords || []).filter(k => k.keyword && k.keyword.trim() !== '');
+    // Without a body there is nothing to mark; don't record keywords as applied
+    activeKeywords = document.body
+      ? (keywords || []).filter(k => k.keyword && k.keyword.trim() !== '')
+      : [];
 
-    if (activeKeywords.length === 0 || !document.body) {
+    if (activeKeywords.length === 0) {
       observer.disconnect();
       return;
     }
@@ -424,7 +427,10 @@ if (!window.__betterFinderLoaded) {
   // auto.js runs first on sites where the user turned on auto-highlight
   if (window.__betterFinderAuto) {
     const key = `keywords_${location.hostname}`;
-    chrome.storage.local.get(key).then(result => {
+    const bodyReady = document.body
+      ? Promise.resolve()
+      : new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve, { once: true }));
+    Promise.all([chrome.storage.local.get(key), bodyReady]).then(([result]) => {
       const saved = (result[key] || []).map(toConfig);
       if (activeKeywords.length === 0) {
         applyKeywords(saved, { scroll: false });
