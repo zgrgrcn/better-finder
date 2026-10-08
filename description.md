@@ -18,7 +18,7 @@ HIGHLIGHTS ITSELF
 • Content that appears later (infinite scroll, single-page apps) is highlighted as it loads
 
 MADE FOR YOU
-• 8 themes inspired by apps you know: Claude, VS Code, Darcula, Spotify, Netflix, Discord, Instagram and Duolingo. Auto switches between Claude and VS Code with your system
+• 8 color themes, from warm paper to dark editor styles. Auto follows your system's light or dark mode
 • The interface is available in 24 languages
 
 PERFECT FOR
